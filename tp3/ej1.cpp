@@ -6,55 +6,48 @@
 #include <chrono>
 
 std::mutex m;
-std::condition_variable cv_queue;  // for PCs to wait when queue is full
-std::condition_variable cv_printer;  // for printer to wait when queue is empty
+std::condition_variable cv_queue;
+std::condition_variable cv_printer;
 bool queue_has_document = false;
-int queued_pc_id = -1;
+int queued_user_id = -1;
 std::atomic<int> processed(0);
-const int NUM_PCS = 10;
+const int NUM_USERS = 10;
 
-void pc_thread(int pc_id) {
+void user_thread(int user_id) {
     std::unique_lock<std::mutex> lock(m);
-    // Wait if queue is full
     while (queue_has_document) {
         cv_queue.wait(lock);
     }
-    // Submit document
-    queued_pc_id = pc_id;
+    queued_user_id = user_id;
     queue_has_document = true;
-    std::cout << "PC " << pc_id << " submitted document" << std::endl;
-    // Notify printer
+    std::cout << "Usuario " << user_id << " agregó archivo a la cola de impresión" << std::endl;
     cv_printer.notify_one();
 }
 
 void printer_thread() {
-    while (processed < NUM_PCS) {
+    while (processed < NUM_USERS) {
         std::unique_lock<std::mutex> lock(m);
-        // Wait if no document in queue
         while (!queue_has_document) {
             cv_printer.wait(lock);
         }
-        // Take document from queue
-        int pc = queued_pc_id;
+        int user_id = queued_user_id;
         queue_has_document = false;
-        // Notify PCs that queue is free
         cv_queue.notify_one();
         lock.unlock();
-        // Simulate printing
-        std::cout << "Printing document from PC " << pc << std::endl;
+
+        std::cout << "Imprimiendo archivo de usuario " << user_id << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        std::cout << "Finished printing document from PC " << pc << std::endl;
         processed++;
     }
 }
 
 int main() {
-    std::thread pcs[NUM_PCS];
-    for (int i = 0; i < NUM_PCS; ++i) {
-        pcs[i] = std::thread(pc_thread, i);
-    }
     std::thread printer(printer_thread);
-    for (auto& t : pcs) {
+    std::thread users[NUM_USERS];
+    for (int i = 0; i < NUM_USERS; ++i) {
+        users[i] = std::thread(user_thread, i + 1);
+    }
+    for (auto& t : users) {
         t.join();
     }
     printer.join();
