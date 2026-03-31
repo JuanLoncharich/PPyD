@@ -1,3 +1,9 @@
+/*
+ * Alumnos:
+ * Julian Ignacio Fernandez
+ * Juan Andres Loncharich
+*/
+
 #include <cerrno>
 #include <chrono>
 #include <cstdlib>

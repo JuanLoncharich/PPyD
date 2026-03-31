@@ -1,3 +1,10 @@
+/*
+ * Alumnos:
+ * Julian Ignacio Fernandez
+ * Juan Andres Loncharich
+*/
+
+
 #include <chrono>
 #include <condition_variable>
 #include <deque>

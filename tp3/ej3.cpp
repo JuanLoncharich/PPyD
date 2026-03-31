@@ -1,3 +1,10 @@
+/*
+ * Alumnos:
+ * Julian Ignacio Fernandez
+ * Juan Andres Loncharich
+*/
+
+
 #include <cstdlib>
 #include <iostream>
 #include <sys/wait.h>

@@ -1,3 +1,9 @@
+
+* Alumnos:
+* Julian Ignacio Fernandez
+* Juan Andres Loncharich
+
+
 # Ejercicio Nº 5
 
 Considerar el Ejercicio 1 desde un punto de vista abstracto, en cuanto a las características y a los elementos de la solución propuesta. Determinar y explicar:

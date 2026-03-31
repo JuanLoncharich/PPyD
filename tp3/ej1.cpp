@@ -1,3 +1,9 @@
+/*
+ * Alumnos:
+ * Julian Ignacio Fernandez
+ * Juan Andres Loncharich
+*/
+
 #include <iostream>
 #include <thread>
 #include <mutex>
