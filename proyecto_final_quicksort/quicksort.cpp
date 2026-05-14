@@ -3,6 +3,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <random>
 #include <chrono>
 
 using Clock = std::chrono::high_resolution_clock;
@@ -224,7 +226,7 @@ int main() {
 
     auto t0 = Clock::now();
 
-    int loaded = 0;
+    std::vector<Player> players;
     while (std::getline(file, line)) {
         auto f = parse_csv_line(line);
         if (f.size() < 9) continue;
@@ -239,9 +241,15 @@ int main() {
         p.blitz_rating     = safe_int(f[8]);
         p.mean             = calc_mean(p.standard_rating, p.rapid_rating, p.blitz_rating);
 
-        // Skip players with no ratings at all
         if (p.mean == 0.0) continue;
+        players.push_back(p);
+    }
 
+    std::mt19937 rng(std::random_device{}());
+    std::shuffle(players.begin(), players.end(), rng);
+
+    int loaded = 0;
+    for (const auto &p : players) {
         list.push_back(p);
         loaded++;
     }
