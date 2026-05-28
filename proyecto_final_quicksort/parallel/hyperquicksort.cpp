@@ -12,8 +12,6 @@
 using Clock = std::chrono::high_resolution_clock;
 using Ms    = std::chrono::duration<double, std::milli>;
 
-// ── Data ─────────────────────────────────────────────────────────────────────
-
 struct Player {
     std::string name;
     std::string title;
@@ -22,7 +20,6 @@ struct Player {
     int         blitz_rating;
     double      mean;
 
-    // For MPI serialization
     void serialize(std::vector<char> &buffer) const {
         size_t name_len = name.size();
         size_t title_len = title.size();
@@ -35,19 +32,16 @@ struct Player {
 
         char *ptr = buffer.data() + offset;
 
-        // Name
         memcpy(ptr, &name_len, sizeof(size_t));
         ptr += sizeof(size_t);
         memcpy(ptr, name.c_str(), name_len);
         ptr += name_len;
 
-        // Title
         memcpy(ptr, &title_len, sizeof(size_t));
         ptr += sizeof(size_t);
         memcpy(ptr, title.c_str(), title_len);
         ptr += title_len;
 
-        // Ratings
         memcpy(ptr, &standard_rating, sizeof(int));
         ptr += sizeof(int);
         memcpy(ptr, &rapid_rating, sizeof(int));
@@ -55,28 +49,24 @@ struct Player {
         memcpy(ptr, &blitz_rating, sizeof(int));
         ptr += sizeof(int);
 
-        // Mean
         memcpy(ptr, &mean, sizeof(double));
     }
 
     static Player deserialize(const char *ptr, size_t &offset) {
         Player p;
 
-        // Name
         size_t name_len;
         memcpy(&name_len, ptr + offset, sizeof(size_t));
         offset += sizeof(size_t);
         p.name = std::string(ptr + offset, name_len);
         offset += name_len;
 
-        // Title
         size_t title_len;
         memcpy(&title_len, ptr + offset, sizeof(size_t));
         offset += sizeof(size_t);
         p.title = std::string(ptr + offset, title_len);
         offset += title_len;
 
-        // Ratings
         memcpy(&p.standard_rating, ptr + offset, sizeof(int));
         offset += sizeof(int);
         memcpy(&p.rapid_rating, ptr + offset, sizeof(int));
@@ -84,7 +74,6 @@ struct Player {
         memcpy(&p.blitz_rating, ptr + offset, sizeof(int));
         offset += sizeof(int);
 
-        // Mean
         memcpy(&p.mean, ptr + offset, sizeof(double));
         offset += sizeof(double);
 
@@ -92,7 +81,6 @@ struct Player {
     }
 };
 
-// Mean of only the non-zero ratings
 double calc_mean(int s, int r, int b) {
     int sum = 0, count = 0;
     if (s > 0) { sum += s; count++; }
@@ -100,8 +88,6 @@ double calc_mean(int s, int r, int b) {
     if (b > 0) { sum += b; count++; }
     return count > 0 ? static_cast<double>(sum) / count : 0.0;
 }
-
-// ── CSV parsing ───────────────────────────────────────────────────────────────
 
 std::vector<std::string> parse_csv_line(const std::string &line) {
     std::vector<std::string> fields;
@@ -128,12 +114,9 @@ int safe_int(const std::string &s) {
     try { return std::stoi(s); } catch (...) { return 0; }
 }
 
-// ── Sequential Quicksort (for local sorting) ──────────────────────────────────
-
 void quicksort(std::vector<Player> &data, int left, int right) {
     if (left >= right) return;
 
-    // Median-of-three pivot selection
     int mid = left + (right - left) / 2;
     double pivot_val;
 
@@ -162,8 +145,6 @@ void quicksort(std::vector<Player> &data, int left, int right) {
     quicksort(data, left, i - 1);
     quicksort(data, i + 1, right);
 }
-
-// ── MPI Communication ─────────────────────────────────────────────────────────
 
 void send_players(const std::vector<Player> &players, int dest, int tag, MPI_Comm comm) {
     std::vector<char> buffer;
@@ -196,28 +177,21 @@ std::vector<Player> recv_players(int src, int tag, MPI_Comm comm) {
     return players;
 }
 
-// ── Hyperquicksort ─────────────────────────────────────────────────────────────
-
 void hyperquicksort(std::vector<Player> &local_data, int rank, int size, MPI_Comm comm) {
     int p = size;
     int d = 0;
 
-    // Calculate dimension of hypercube
     while ((1 << d) < p) d++;
 
-    // Step 1: Locally sort data in descending order
     if (!local_data.empty()) {
         quicksort(local_data, 0, local_data.size() - 1);
     }
 
-    // Step 2: Hypercube communication phases
     for (int dim = 0; dim < d; dim++) {
-        // Partner is rank with bit dim flipped
         int partner = rank ^ (1 << dim);
 
         if (partner >= p) continue;
 
-        // Median of current processor serves as pivot
         double local_pivot = local_data.empty() ? 0.0 :
                             local_data[local_data.size() / 2].mean;
 
@@ -225,7 +199,6 @@ void hyperquicksort(std::vector<Player> &local_data, int rank, int size, MPI_Com
         MPI_Allreduce(&local_pivot, &pivot, 1, MPI_DOUBLE, MPI_SUM, comm);
         pivot /= 2.0;
 
-        // Partition data around pivot
         std::vector<Player> keep, send;
 
         if (rank < partner) {
@@ -246,22 +219,24 @@ void hyperquicksort(std::vector<Player> &local_data, int rank, int size, MPI_Com
             }
         }
 
-        // Exchange data
-        std::vector<Player> received = recv_players(partner, dim * 2, comm);
-        send_players(send, partner, dim * 2, comm);
+        // FIXED: Coordinated send/recv to avoid deadlock
+        std::vector<Player> received;
+        if (rank < partner) {
+            send_players(send, partner, dim * 2, comm);
+            received = recv_players(partner, dim * 2, comm);
+        } else {
+            received = recv_players(partner, dim * 2, comm);
+            send_players(send, partner, dim * 2, comm);
+        }
 
-        // Merge kept and received data
         local_data = keep;
         local_data.insert(local_data.end(), received.begin(), received.end());
 
-        // Re-sort locally
         if (!local_data.empty()) {
             quicksort(local_data, 0, local_data.size() - 1);
         }
     }
 }
-
-// ── Main ───────────────────────────────────────────────────────────────────────
 
 int main(int argc, char **argv) {
     MPI_Init(&argc, &argv);
@@ -277,7 +252,6 @@ int main(int argc, char **argv) {
 
     auto t0 = Clock::now();
 
-    // Rank 0 reads and distributes data
     if (rank == 0) {
         std::ifstream file(csv_file);
         if (!file.is_open()) {
@@ -287,7 +261,7 @@ int main(int argc, char **argv) {
 
         std::vector<Player> all_players;
         std::string line;
-        std::getline(file, line); // skip header
+        std::getline(file, line);
 
         while (std::getline(file, line)) {
             auto f = parse_csv_line(line);
@@ -305,25 +279,21 @@ int main(int argc, char **argv) {
             all_players.push_back(p);
         }
 
-        // Shuffle for fair comparison with sequential
         std::mt19937 rng(std::random_device{}());
         std::shuffle(all_players.begin(), all_players.end(), rng);
 
         total_loaded = all_players.size();
 
-        // Distribute round-robin
         std::vector<std::vector<Player>> processor_data(size);
         for (size_t i = 0; i < all_players.size(); i++) {
             processor_data[i % size].push_back(all_players[i]);
         }
 
-        // Send data to all processors
         for (int i = 1; i < size; i++) {
             send_players(processor_data[i], i, 0, MPI_COMM_WORLD);
         }
         local_data = processor_data[0];
     } else {
-        // Receive data from rank 0
         local_data = recv_players(0, 0, MPI_COMM_WORLD);
     }
 
@@ -337,13 +307,11 @@ int main(int argc, char **argv) {
         std::cout << "Sorting with Hyperquicksort...\n";
     }
 
-    // Perform parallel sort
     auto t2 = Clock::now();
     hyperquicksort(local_data, rank, size, MPI_COMM_WORLD);
     MPI_Barrier(MPI_COMM_WORLD);
     auto t3 = Clock::now();
 
-    // Gather results on rank 0
     std::vector<Player> sorted_data;
     std::vector<int> local_sizes(size);
 
@@ -358,13 +326,11 @@ int main(int argc, char **argv) {
         std::cout << "Sort time: " << sort_time << " ms\n";
         std::cout << "Total time: " << total_time << " ms\n";
 
-        // Prepare receive buffer
         std::vector<int> recv_displs(size);
         std::vector<char> recv_buffer;
         std::vector<int> send_sizes(size);
         send_sizes[0] = 0;
 
-        // First gather the sizes of serialized data
         for (const auto &p : local_data) {
             std::vector<char> tmp;
             p.serialize(tmp);
@@ -378,7 +344,6 @@ int main(int argc, char **argv) {
             recv_buffer.resize(recv_buffer.size() + send_sizes[i]);
         }
 
-        // Serialize local data
         std::vector<char> send_buffer;
         for (const auto &p : local_data) {
             p.serialize(send_buffer);
@@ -388,7 +353,6 @@ int main(int argc, char **argv) {
                     recv_buffer.data(), send_sizes.data(), recv_displs.data(), MPI_BYTE,
                     0, MPI_COMM_WORLD);
 
-        // Deserialize all data
         for (int i = 0; i < size; i++) {
             size_t offset = recv_displs[i];
             while (offset < static_cast<size_t>(recv_displs[i] + send_sizes[i])) {
@@ -396,7 +360,6 @@ int main(int argc, char **argv) {
             }
         }
 
-        // Print top 20
         std::cout << "\nRank  | Title | Name                            | Std  | Rapid | Blitz | Mean\n";
         std::cout << std::string(80, '-') << "\n";
         for (int i = 0; i < std::min(20, static_cast<int>(sorted_data.size())); i++) {
@@ -407,7 +370,6 @@ int main(int argc, char **argv) {
                    p.standard_rating, p.rapid_rating, p.blitz_rating, p.mean);
         }
 
-        // Save to CSV with processor count in filename
         std::string out_file = "results/sorted_players_p" + std::to_string(size) + ".csv";
         std::ofstream out(out_file);
         out << "Rank,Name,Title,Standard_Rating,Rapid_Rating,Blitz_Rating,Mean\n";
@@ -423,14 +385,12 @@ int main(int argc, char **argv) {
         }
         std::cout << "\nFull results saved to " << out_file << "\n";
 
-        // Append timing to benchmark CSV
         std::ofstream bench("results/benchmark.csv", std::ios::app);
         if (bench.tellp() == 0) {
             bench << "processors,distribution_time_ms,sort_time_ms,total_time_ms\n";
         }
         bench << size << "," << dist_time << "," << sort_time << "," << total_time << "\n";
     } else {
-        // Send local data size to rank 0
         std::vector<char> send_buffer;
         for (const auto &p : local_data) {
             p.serialize(send_buffer);

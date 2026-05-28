@@ -1,71 +1,20 @@
-# Makefile for Hyperquicksort and Sequential Quicksort
-
-MPICXX = mpicxx
-CXX = g++
+# Makefile for Hyperquicksort - CCAD Cluster
+MPI_BIN = /ccad/stack/23.02/base/linux-rocky9-broadwell/gcc-12.2.0/openmpi-4.1.4-olpnqaqkqy7xxf26653hwdpsc42tno6w/bin
+MPICXX = $(MPI_BIN)/mpicxx
 CXXFLAGS = -O3 -std=c++17 -Wall -Wextra
 
-PARALLEL_TARGET = hyperquicksort
-SEQ_TARGET = quicksort_seq
+TARGET = hyperquicksort
+SRC = hyperquicksort.cpp
 
-PARALLEL_SRC = hyperquicksort.cpp
-SEQ_SRC = quicksort_seq.cpp
+.PHONY: all clean run
 
-.PHONY: all clean run run-seq compare benchmark graphs
-
-all: $(PARALLEL_TARGET) $(SEQ_TARGET)
-
-$(PARALLEL_TARGET): $(PARALLEL_SRC)
-	$(MPICXX) $(CXXFLAGS) -o $(PARALLEL_TARGET) $(PARALLEL_SRC)
-
-$(SEQ_TARGET): $(SEQ_SRC)
-	$(CXX) $(CXXFLAGS) -o $(SEQ_TARGET) $(SEQ_SRC)
+all: $(TARGET)
+$(TARGET): $(SRC)
+	$(MPICXX) $(CXXFLAGS) -o $(TARGET) $(SRC)
 
 clean:
-	rm -f $(PARALLEL_TARGET) $(SEQ_TARGET)
-	rm -rf results/*.csv results/*.png
+	rm -f $(TARGET) *.out *.err
 
-# Run parallel version with 4 processors
-run: $(PARALLEL_TARGET)
-	mpiexec -np 4 ./$(PARALLEL_TARGET)
-
-# Run sequential version
-run-seq: $(SEQ_TARGET)
-	./$(SEQ_TARGET)
-
-# Run both for comparison
-compare: all
-	@echo "========================================="
-	@echo "Sequential Quicksort"
-	@echo "========================================="
-	./$(SEQ_TARGET)
-	@echo ""
-	@echo "========================================="
-	@echo "Parallel Hyperquicksort (4 processors)"
-	@echo "========================================="
-	mpiexec -np 4 ./$(PARALLEL_TARGET)
-
-# Benchmark from 1 to 64 processors (powers of 2)
-benchmark: all
-	@echo "Running benchmark..."
-	@mkdir -p results
-	@> results/benchmark.csv
-	@echo "Sequential (3 runs)..."
-	@for i in 1 2 3; do \
-		echo "Run $$i"; \
-		./$(SEQ_TARGET) 2>&1 | grep -E "(Loaded|Sorted|Total)"; \
-	done
-	@for np in 1 2 4 8 16 32 64; do \
-		echo "Parallel with $$np processors..."; \
-		mpiexec -np $$np ./$(PARALLEL_TARGET); \
-	done
-	@echo "Benchmark complete! Results in results/benchmark.csv"
-
-# Generate performance graphs
-graphs:
-	@echo "Generating performance graphs..."
-	@python3 generate_graphs.py
-
-# Run with custom number of processors
-run-n: $(PARALLEL_TARGET)
-	@echo "Usage: make run-n N=<number_of_processors>"
-	mpiexec -np $(N) ./$(PARALLEL_TARGET)
+run: $(TARGET)
+	@echo "Use: sbatch run.slurm"
+	@echo "NO ejecutar directamente en login node"

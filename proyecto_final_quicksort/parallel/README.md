@@ -1,143 +1,69 @@
-# Parallel Hyperquicksort Implementation
+# Hyperquicksort - Implementación Paralela para Cluster CCAD
 
-Parallel implementation of quicksort using the Hyperquicksort algorithm with MPI for cluster computing.
+Implementación del algoritmo **Hyperquicksort** usando MPI para ordenamiento paralelo en el cluster CCAD (Mulatona).
 
-## Files
+## Características
 
-- `hyperquicksort.cpp` - Parallel Hyperquicksort implementation using MPI
-- `quicksort_seq.cpp` - Original sequential quicksort (for comparison)
-- `benchmark_cluster.sh` - SLURM script for full benchmark (1-64 processors)
-- `generate_graphs.py` - Python script to generate performance graphs
-- `Makefile` - Build configuration with benchmark and graph targets
-- `run_cluster.slurm` - Simple SLURM script for single test run
+- **Estructura de datos**: LinkedList (igual que versión secuencial)
+- **Dataset**: 977,687 jugadores de ajedrez (428,313 con ratings válidos)
+- **Algoritmo**: Hyperquicksort paralelo con hypercube communication
 
-## Algorithm: Hyperquicksort
+## Algoritmo Hyperquicksort
 
-Hyperquicksort is a parallel sorting algorithm based on the hypercube communication pattern:
+1. **Ordenamiento Local**: Quicksort sobre LinkedList en cada procesador
+2. **Selección de Pivote**: Promedio de medianas de todos los procesadores
+3. **Partición**: División de LinkedList según pivote
+4. **Intercambio**: Comunicación coordinada para evitar deadlock
+5. **Fusión**: Merge de LinkedLists recibidas
+6. **Iteraciones**: d = log₂(P) dimensiones del hypercube
 
-1. **Initial Distribution**: Data is distributed across processors using round-robin
-2. **Local Sort**: Each processor sorts its local data independently
-3. **Hypercube Communication**: For each dimension d = 0 to log₂(p)-1:
-   - Processors are paired (each processor pairs with one that has bit d flipped)
-   - A pivot is selected (average of medians)
-   - Data is exchanged between paired processors
-   - Each processor keeps elements that belong to its partition
-4. **Final Gather**: Results are gathered on rank 0
+## Compilación
 
-## Building
+En **login node** únicamente:
 
-### On a cluster with MPI:
 ```bash
-module load openmpi  # or your cluster's MPI module
+export PATH=/ccad/stack/23.02/base/linux-rocky9-broadwell/gcc-12.2.0/openmpi-4.1.4-olpnqaqkqy7xxf26653hwdpsc42tno6w/bin:$PATH
+export LD_LIBRARY_PATH=/ccad/stack/23.02/base/linux-rocky9-broadwell/gcc-12.2.0/openmpi-4.1.4-olpnqaqkqy7xxf26653hwdpsc42tno6w/lib:$LD_LIBRARY_PATH
+
+mpicxx -O3 -std=c++17 -o hyperquicksort hyperquicksort.cpp
+```
+
+O usar el Makefile:
+```bash
 make
 ```
 
-Or manually:
-```bash
-mpicxx -O3 -std=c++17 -o hyperquicksort hyperquicksort.cpp
-g++ -O3 -std=c++17 -o quicksort_seq quicksort_seq.cpp
-```
+## Ejecución
 
-## Running
-
-### Quick Test (Local)
-```bash
-# Sequential version
-make run-seq
-
-# Parallel version (4 processors)
-make run
-
-# Compare both
-make compare
-```
-
-### Full Benchmark (Cluster)
-
-**Using SLURM:**
-```bash
-# Submit the benchmark job (1-64 processors)
-sbatch benchmark_cluster.sh
-
-# Check job status
-squeue -u $USER
-
-# View output
-cat results/benchmark_*.out
-```
-
-**Using Make (if MPI is available locally):**
-```bash
-make benchmark
-```
-
-**Manual execution:**
-```bash
-# Sequential
-./quicksort_seq
-
-# Parallel with N processors
-mpiexec -np 4 ./hyperquicksort
-mpiexec -np 8 ./hyperquicksort
-mpiexec -np 16 ./hyperquicksort
-```
-
-## Output
-
-### Console Output
-- Top 20 sorted players
-- Timing information (distribution, sort, total)
-
-### Files Generated
-- `results/benchmark.csv` - Timing data for all runs
-- `results/sorted_players_seq.csv` - Sequential sort results
-- `results/sorted_players_p{N}.csv` - Parallel sort results for N processors
-
-## Generating Graphs
-
-After running benchmarks, generate performance graphs:
+**NO ejecutar en login node**. Usar SLURM:
 
 ```bash
-make graphs
-# or
-python3 generate_graphs.py
+sbatch run.slurm
 ```
 
-This creates:
-- `results/performance_graphs.png` - 4-panel analysis (sort time, speedup, efficiency, total time)
-- `results/performance_table.png` - Summary table of all metrics
-- `results/time_breakdown.png` - Bar chart showing sort vs communication time
+## Resultados (4 procesadores)
 
-## Requirements
+- 428,313 jugadores ordenados
+- Tiempo de ordenamiento: ~430 ms
+- Tiempo total: ~1.3 segundos
 
-- C++17 compatible compiler
-- MPI library (OpenMPI, MPICH, etc.)
-- Python 3 + matplotlib + pandas (for graphs)
-- For cluster: SLURM scheduler (or modify script for your scheduler)
+## Estructura LinkedList
 
-## Installing Python Dependencies
+```cpp
+struct Node {
+    Player data;
+    Node *next;
+};
 
-```bash
-pip install matplotlib pandas numpy
+class LinkedList {
+    Node *head, *tail;
+    int size;
+    void push_back(const Player &p);
+    void sort();  // Quicksort para LinkedList
+};
 ```
 
-## Performance Metrics
+## Referencias
 
-The benchmark measures:
-- **Distribution Time**: Time to scatter data across processors
-- **Sort Time**: Actual sorting time (parallel quicksort)
-- **Total Time**: Complete execution including I/O
-
-Metrics calculated:
-- **Speedup**: T₁ / Tₚ (sequential time / parallel time)
-- **Efficiency**: (Speedup / p) × 100%
-
-## Expected Results
-
-With ~50,000 chess players:
-- Sequential: ~50-100ms
-- 2 processors: ~30-60ms (1.5-2x speedup)
-- 4 processors: ~20-40ms (2.5-4x speedup)
-- 8+ processors: Communication overhead becomes significant
-
-Note: Speedup depends on cluster interconnect and data size.
+- Wiki CCAD: https://wiki.ccad.unc.edu.ar/
+- Documentación SLURM: http://slurm.schedmd.com/
