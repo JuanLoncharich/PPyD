@@ -16,8 +16,8 @@ from pathlib import Path
 from typing import Dict, List
 
 # Configuration
-SIZES = [100000, 1000000, 2500000]
-SIZE_NAMES = ["100k", "1M", "2.5M"]
+SIZES = [100000, 250000, 750000, 2000000, 5000000]
+SIZE_NAMES = ["100k", "250k", "750k", "2M", "5M"]
 PROCS = [1, 2, 4, 8, 16, 32]
 RUNS = [1, 2, 3]
 

@@ -23,7 +23,7 @@ cd ~/hyperquicksort/experiments/scripts
 ./run_experiments_cluster.sh
 ```
 
-Esto envía **63 jobs** (3 tamaños × 7 configuraciones × 3 runs).
+Esto envía **105 jobs** (5 tamaños × 7 configuraciones × 3 runs).
 
 ## Paso 3: Esperar a que Completen
 
@@ -56,13 +56,19 @@ python3 plot_results.py
 | Tamaño | Procesos | Runs |
 |--------|----------|------|
 | 100k | 1, 2, 4, 8, 16, 32 | 3 |
-| 1M | 1, 2, 4, 8, 16, 32 | 3 |
-| 2.5M | 1, 2, 4, 8, 16, 32 | 3 |
+| 250k | 1, 2, 4, 8, 16, 32 | 3 |
+| 750k | 1, 2, 4, 8, 16, 32 | 3 |
+| 2M | 1, 2, 4, 8, 16, 32 | 3 |
+| 5M | 1, 2, 4, 8, 16, 32 | 3 |
+
+**Total: 105 jobs** (5 tamaños × 7 configs × 3 runs)
 
 ## Tiempos Esperados
 
 - 100k: segundos
-- 1M: ~10-30 segundos
-- 2.5M: ~1-2 minutos
+- 250k: ~5 segundos
+- 750k: ~15 segundos
+- 2M: ~1 minuto
+- 5M: ~3-5 minutos (paralelo), ~15 min (secuencial)
 
-Total: ~30-45 minutos en cluster (dependiendo de cola)
+Total: ~1-2 horas en cluster (dependiendo de cola)

@@ -6,8 +6,10 @@ Framework para ejecutar y analizar experimentos de rendimiento del QuickSort sec
 
 ### Tamaños de Array (N)
 - 100,000 elementos (100k)
-- 1,000,000 elementos (1M)
-- 2,500,000 elementos (2.5M)
+- 250,000 elementos (250k)
+- 750,000 elementos (750k)
+- 2,000,000 elementos (2M)
+- 5,000,000 elementos (5M)
 
 ### Número de Procesos (p)
 - 1, 2, 4, 8, 16, 32 procesos MPI
