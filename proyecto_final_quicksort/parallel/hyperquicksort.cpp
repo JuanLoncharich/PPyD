@@ -89,6 +89,35 @@ double calc_mean(int s, int r, int b) {
     return count > 0 ? static_cast<double>(sum) / count : 0.0;
 }
 
+// Generate random player
+Player generate_random_player(int id, std::mt19937 &rng) {
+    static const std::vector<std::string> titles = {"", "GM", "IM", "FM", "CM", "WGM", "WIM", "WFM"};
+    static const std::vector<std::string> first_names = {
+        "Magnus", "Hikaru", "Fabiano", "Maxime", "Ding", "Ian", "Wesley",
+        "Levon", "Viswanathan", "Vladimir", "Sergey", "Anish", "Shakhriyar",
+        "Teimour", "Yu", "Dmitry", "Richard", "Jan", "Alexander", "Vidit"
+    };
+    static const std::vector<std::string> last_names = {
+        "Carlsen", "Nakamura", "Caruana", "Vachier-Lagrave", "Liren", "Nepomniachtchi",
+        "So", "Aronian", "Anand", "Kramnik", "Karjakin", "Giri", "Mamedyarov",
+        "Radjabov", "Yangyi", "Andreikin", "Rapport", "Duda", "Grischuk", "Gujrathi"
+    };
+
+    std::uniform_int_distribution<> title_dist(0, titles.size() - 1);
+    std::uniform_int_distribution<> first_dist(0, first_names.size() - 1);
+    std::uniform_int_distribution<> last_dist(0, last_names.size() - 1);
+    std::uniform_int_distribution<> rating_dist(2000, 2850);
+
+    Player p;
+    p.name = first_names[first_dist(rng)] + std::string(", ") + last_names[last_dist(rng)];
+    p.title = titles[title_dist(rng)];
+    p.standard_rating = rating_dist(rng);
+    p.rapid_rating = rating_dist(rng);
+    p.blitz_rating = rating_dist(rng);
+    p.mean = calc_mean(p.standard_rating, p.rapid_rating, p.blitz_rating);
+    return p;
+}
+
 std::vector<std::string> parse_csv_line(const std::string &line) {
     std::vector<std::string> fields;
     std::string field;
@@ -112,6 +141,21 @@ std::vector<std::string> parse_csv_line(const std::string &line) {
 int safe_int(const std::string &s) {
     if (s.empty()) return 0;
     try { return std::stoi(s); } catch (...) { return 0; }
+}
+
+void print_usage(const char *prog_name) {
+    if (std::string(prog_name).find("hyperquicksort") != std::string::npos) {
+        std::cout << "Usage: " << prog_name << " [options]\n\n"
+                  << "Options:\n"
+                  << "  --csv <file>      Load players from CSV file (default: top_chess_players_aug_2020.csv)\n"
+                  << "  --generate N      Generate N random players at runtime\n"
+                  << "  --help            Show this help message\n\n"
+                  << "Examples:\n"
+                  << "  " << prog_name << "                    # Load from default CSV (via SLURM)\n"
+                  << "  " << prog_name << " --csv data.csv      # Load from specific CSV\n"
+                  << "  " << prog_name << " --generate 100000  # Generate 100000 random players\n\n"
+                  << "Note: Use srun to execute this program on the cluster.\n";
+    }
 }
 
 void quicksort(std::vector<Player> &data, int left, int right) {
@@ -245,7 +289,35 @@ int main(int argc, char **argv) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    const std::string csv_file = "top_chess_players_aug_2020.csv";
+    std::string csv_file = "top_chess_players_aug_2020.csv";
+    int generate_count = 0;
+    bool use_csv = true;
+
+    // Parse command line arguments (only on rank 0)
+    if (rank == 0) {
+        for (int i = 1; i < argc; i++) {
+            std::string arg = argv[i];
+            if (arg == "--help" || arg == "-h") {
+                print_usage(argv[0]);
+                MPI_Abort(MPI_COMM_WORLD, 0);
+            } else if (arg == "--csv") {
+                if (i + 1 < argc) {
+                    csv_file = argv[++i];
+                    use_csv = true;
+                }
+            } else if (arg == "--generate") {
+                if (i + 1 < argc) {
+                    generate_count = std::stoi(argv[++i]);
+                    use_csv = false;
+                }
+            }
+        }
+    }
+
+    // Broadcast the mode to all processors
+    int mode = use_csv ? 1 : 0;
+    MPI_Bcast(&mode, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    use_csv = (mode == 1);
 
     std::vector<Player> local_data;
     int total_loaded = 0;
@@ -253,30 +325,40 @@ int main(int argc, char **argv) {
     auto t0 = Clock::now();
 
     if (rank == 0) {
-        std::ifstream file(csv_file);
-        if (!file.is_open()) {
-            std::cerr << "Error: could not open " << csv_file << "\n";
-            MPI_Abort(MPI_COMM_WORLD, 1);
-        }
-
         std::vector<Player> all_players;
-        std::string line;
-        std::getline(file, line);
 
-        while (std::getline(file, line)) {
-            auto f = parse_csv_line(line);
-            if (f.size() < 9) continue;
+        if (use_csv) {
+            std::ifstream file(csv_file);
+            if (!file.is_open()) {
+                std::cerr << "Error: could not open " << csv_file << "\n";
+                MPI_Abort(MPI_COMM_WORLD, 1);
+            }
 
-            Player p;
-            p.name             = f[1];
-            p.title            = f[5];
-            p.standard_rating  = safe_int(f[6]);
-            p.rapid_rating     = safe_int(f[7]);
-            p.blitz_rating     = safe_int(f[8]);
-            p.mean             = calc_mean(p.standard_rating, p.rapid_rating, p.blitz_rating);
+            std::string line;
+            std::getline(file, line);
 
-            if (p.mean == 0.0) continue;
-            all_players.push_back(p);
+            while (std::getline(file, line)) {
+                auto f = parse_csv_line(line);
+                if (f.size() < 9) continue;
+
+                Player p;
+                p.name             = f[1];
+                p.title            = f[5];
+                p.standard_rating  = safe_int(f[6]);
+                p.rapid_rating     = safe_int(f[7]);
+                p.blitz_rating     = safe_int(f[8]);
+                p.mean             = calc_mean(p.standard_rating, p.rapid_rating, p.blitz_rating);
+
+                if (p.mean == 0.0) continue;
+                all_players.push_back(p);
+            }
+        } else {
+            // Generate random players
+            std::cout << "Generating " << generate_count << " random players...\n";
+            std::mt19937 rng(std::random_device{}());
+            for (int i = 0; i < generate_count; i++) {
+                all_players.push_back(generate_random_player(i, rng));
+            }
         }
 
         std::mt19937 rng(std::random_device{}());

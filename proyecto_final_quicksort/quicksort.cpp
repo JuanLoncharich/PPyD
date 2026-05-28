@@ -30,6 +30,35 @@ double calc_mean(int s, int r, int b) {
     return count > 0 ? static_cast<double>(sum) / count : 0.0;
 }
 
+// Generate random player
+Player generate_random_player(int id, std::mt19937 &rng) {
+    static const std::vector<std::string> titles = {"", "GM", "IM", "FM", "CM", "WGM", "WIM", "WFM"};
+    static const std::vector<std::string> first_names = {
+        "Magnus", "Hikaru", "Fabiano", "Maxime", "Ding", "Ian", "Wesley",
+        "Levon", "Viswanathan", "Vladimir", "Sergey", "Anish", "Shakhriyar",
+        "Teimour", "Yu", "Dmitry", "Richard", "Jan", "Alexander", "Vidit"
+    };
+    static const std::vector<std::string> last_names = {
+        "Carlsen", "Nakamura", "Caruana", "Vachier-Lagrave", "Liren", "Nepomniachtchi",
+        "So", "Aronian", "Anand", "Kramnik", "Karjakin", "Giri", "Mamedyarov",
+        "Radjabov", "Yangyi", "Andreikin", "Rapport", "Duda", "Grischuk", "Gujrathi"
+    };
+
+    std::uniform_int_distribution<> title_dist(0, titles.size() - 1);
+    std::uniform_int_distribution<> first_dist(0, first_names.size() - 1);
+    std::uniform_int_distribution<> last_dist(0, last_names.size() - 1);
+    std::uniform_int_distribution<> rating_dist(2000, 2850);
+
+    Player p;
+    p.name = first_names[first_dist(rng)] + std::string(", ") + last_names[last_dist(rng)];
+    p.title = titles[title_dist(rng)];
+    p.standard_rating = rating_dist(rng);
+    p.rapid_rating = rating_dist(rng);
+    p.blitz_rating = rating_dist(rng);
+    p.mean = calc_mean(p.standard_rating, p.rapid_rating, p.blitz_rating);
+    return p;
+}
+
 // ── Linked list ───────────────────────────────────────────────────────────────
 
 struct Node {
@@ -211,38 +240,90 @@ int safe_int(const std::string &s) {
     try { return std::stoi(s); } catch (...) { return 0; }
 }
 
-int main() {
-    const std::string csv_file = "top_chess_players_aug_2020.csv";
-    std::ifstream file(csv_file);
+void print_usage(const char *prog_name) {
+    std::cout << "Usage: " << prog_name << " [options]\n\n"
+              << "Options:\n"
+              << "  --csv <file>      Load players from CSV file (default: top_chess_players_aug_2020.csv)\n"
+              << "  --generate N      Generate N random players at runtime\n"
+              << "  --help            Show this help message\n\n"
+              << "Examples:\n"
+              << "  " << prog_name << "                    # Load from default CSV\n"
+              << "  " << prog_name << " --csv data.csv      # Load from specific CSV\n"
+              << "  " << prog_name << " --generate 10000   # Generate 10000 random players\n";
+}
 
-    if (!file.is_open()) {
-        std::cerr << "Error: could not open " << csv_file << "\n";
-        return 1;
+int main(int argc, char **argv) {
+    std::string csv_file = "top_chess_players_aug_2020.csv";
+    int generate_count = 0;
+    bool use_csv = true;
+
+    // Parse command line arguments
+    for (int i = 1; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "--help" || arg == "-h") {
+            print_usage(argv[0]);
+            return 0;
+        } else if (arg == "--csv") {
+            if (i + 1 < argc) {
+                csv_file = argv[++i];
+                use_csv = true;
+            } else {
+                std::cerr << "Error: --csv requires a filename argument\n";
+                return 1;
+            }
+        } else if (arg == "--generate") {
+            if (i + 1 < argc) {
+                generate_count = std::stoi(argv[++i]);
+                use_csv = false;
+            } else {
+                std::cerr << "Error: --generate requires a number argument\n";
+                return 1;
+            }
+        } else {
+            std::cerr << "Unknown option: " << arg << "\n";
+            print_usage(argv[0]);
+            return 1;
+        }
     }
 
     LinkedList list;
-    std::string line;
-    std::getline(file, line); // skip header
+    std::vector<Player> players;
 
     auto t0 = Clock::now();
 
-    std::vector<Player> players;
-    while (std::getline(file, line)) {
-        auto f = parse_csv_line(line);
-        if (f.size() < 9) continue;
+    if (use_csv) {
+        // Load from CSV file
+        std::ifstream file(csv_file);
+        if (!file.is_open()) {
+            std::cerr << "Error: could not open " << csv_file << "\n";
+            return 1;
+        }
 
-        Player p;
-        // f[0]=fide_id, f[1]=name, f[2]=federation, f[3]=gender,
-        // f[4]=year, f[5]=title, f[6]=standard, f[7]=rapid, f[8]=blitz
-        p.name             = f[1];
-        p.title            = f[5];
-        p.standard_rating  = safe_int(f[6]);
-        p.rapid_rating     = safe_int(f[7]);
-        p.blitz_rating     = safe_int(f[8]);
-        p.mean             = calc_mean(p.standard_rating, p.rapid_rating, p.blitz_rating);
+        std::string line;
+        std::getline(file, line); // skip header
 
-        if (p.mean == 0.0) continue;
-        players.push_back(p);
+        while (std::getline(file, line)) {
+            auto f = parse_csv_line(line);
+            if (f.size() < 9) continue;
+
+            Player p;
+            p.name             = f[1];
+            p.title            = f[5];
+            p.standard_rating  = safe_int(f[6]);
+            p.rapid_rating     = safe_int(f[7]);
+            p.blitz_rating     = safe_int(f[8]);
+            p.mean             = calc_mean(p.standard_rating, p.rapid_rating, p.blitz_rating);
+
+            if (p.mean == 0.0) continue;
+            players.push_back(p);
+        }
+    } else {
+        // Generate random players
+        std::cout << "Generating " << generate_count << " random players...\n";
+        std::mt19937 rng(std::random_device{}());
+        for (int i = 0; i < generate_count; i++) {
+            players.push_back(generate_random_player(i, rng));
+        }
     }
 
     std::mt19937 rng(std::random_device{}());
