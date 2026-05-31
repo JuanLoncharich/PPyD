@@ -70,22 +70,36 @@ def load_results(results_dir: Path) -> Tuple[Dict, Dict]:
     return sequential, parallel
 
 
+def get_available_sizes(sequential: Dict, parallel: Dict) -> tuple:
+    """Get only the sizes that have data."""
+    available_sizes = []
+    available_names = []
+    for i, size in enumerate(SIZES):
+        if size in sequential or any(size in parallel.get(p, {}) for p in PROCS):
+            available_sizes.append(size)
+            available_names.append(SIZE_NAMES[i])
+    return available_sizes, available_names
+
+
 def plot_execution_time(sequential: Dict, parallel: Dict, output_dir: Path):
     """Plot 1: Execution Time vs Array Size."""
     fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Get only available sizes
+    avail_sizes, avail_names = get_available_sizes(sequential, parallel)
 
     # For each number of processors, plot times vs size
     for i, procs in enumerate([1, 2, 4, 8]):
         if procs == 1:
             # Sequential
-            times = [sequential[size]['sort_mean'] / 1000 for size in SIZES]  # Convert to seconds
-            errors = [sequential[size]['sort_std'] / 1000 for size in SIZES]
+            times = [sequential[size]['sort_mean'] / 1000 for size in avail_sizes]  # Convert to seconds
+            errors = [sequential[size]['sort_std'] / 1000 for size in avail_sizes]
             label = 'Secuencial (p=1)'
         else:
             # Parallel
             times = []
             errors = []
-            for size in SIZES:
+            for size in avail_sizes:
                 if procs in parallel.get(size, {}):
                     times.append(parallel[size][procs]['sort_mean'] / 1000)
                     errors.append(parallel[size][procs]['sort_std'] / 1000)
@@ -94,7 +108,7 @@ def plot_execution_time(sequential: Dict, parallel: Dict, output_dir: Path):
                     errors.append(0)
             label = f'Paralelo (p={procs})'
 
-        ax.errorbar(SIZES, times, yerr=errors, marker=MARKERS[i], markersize=8,
+        ax.errorbar(avail_sizes, times, yerr=errors, marker=MARKERS[i], markersize=8,
                    linewidth=2, capsize=5, label=label, color=COLORS[i])
 
     ax.set_xscale('log')

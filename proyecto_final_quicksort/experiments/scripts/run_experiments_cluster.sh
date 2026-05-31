@@ -1,18 +1,41 @@
 #!/bin/bash
-# run_experiments_cluster.sh - Run all experiments directly on CCAD cluster
+# run_experiments_cluster.sh - Run all experiments or specific size
 # Execute this script ON the cluster (mulatona)
+#
+# Usage:
+#   ./run_experiments_cluster.sh              # Run all sizes
+#   ./run_experiments_cluster.sh 100k         # Run specific size
+#   ./run_experiments_cluster.sh 250k         # Run specific size
+#   ./run_experiments_cluster.sh 750k         # Run specific size
+#   ./run_experiments_cluster.sh 2M           # Run specific size
+#   ./run_experiments_cluster.sh 5M           # Run specific size
 
 set -e
 
 EXP_DIR="$HOME/hyperquicksort"
-SIZES=(100000 250000 750000 2000000 5000000)
-SIZE_NAMES=("100k" "250k" "750k" "2M" "5M")
+declare -A SIZE_MAP
+SIZE_MAP=(["100k"]=100000 ["250k"]=250000 ["750k"]=750000 ["2M"]=2000000 ["5M"]=5000000)
 PROCS=(2 4 8 16 32)
 RUNS=(1 2 3)
 
+# Parse command line argument
+if [ -n "$1" ]; then
+    # Run specific size only
+    if [ -z "${SIZE_MAP[$1]}" ]; then
+        echo "Error: Invalid size '$1'. Valid sizes: ${!SIZE_MAP[@]}"
+        exit 1
+    fi
+    SIZES=(${SIZE_MAP[$1]})
+    SIZE_NAMES=($1)
+else
+    # Run all sizes
+    SIZES=(100000 250000 750000 2000000 5000000)
+    SIZE_NAMES=("100k" "250k" "750k" "2M" "5M")
+fi
+
 echo "=== QuickSort Performance Experiments ==="
 echo "Running on cluster: $(hostname)"
-echo "Sizes: ${SIZES[*]}"
+echo "Sizes: ${SIZE_NAMES[*]}"
 echo "Processes: ${PROCS[*]}"
 echo "Runs per configuration: ${#RUNS[@]}"
 echo ""
@@ -40,7 +63,11 @@ run_seq() {
 . /etc/profile
 cd $EXP_DIR
 echo "Sequential Quicksort --generate $size players (run $run)"
-./quicksort_seq --generate $size
+if [ -f "$EXP_DIR/quicksort_seq" ]; then
+    ./quicksort_seq --generate $size
+else
+    ./quicksort --generate $size
+fi
 EOF
 
     cd $EXP_DIR
@@ -67,8 +94,10 @@ run_par() {
 #SBATCH --error=$EXP_DIR/experiments/results/par_${size_name}_p${procs}_run${run}.err
 
 . /etc/profile
-cd $EXP_DIR/parallel
-echo "Hyperquicksort --generate $size players with $procs processes (run $run)"
+export PATH=/ccad/stack/23.02/base/linux-rocky9-broadwell/gcc-12.2.0/openmpi-4.1.4-olpnqaqkqy7xxf26653hwdpsc42tno6w/bin:$PATH
+export LD_LIBRARY_PATH=/ccad/stack/23.02/base/linux-rocky9-broadwell/gcc-12.2.0/openmpi-4.1.4-olpnqaqkqy7xxf26653hwdpsc42tno6w/lib:$LD_LIBRARY_PATH
+
+cd $EXP_DIR
 mpirun --oversubscribe -np $procs --bind-to none --map-by ppr:1:core ./hyperquicksort --generate $size
 EOF
 
@@ -77,7 +106,7 @@ EOF
     echo "$job_id"
 }
 
-# Submit all jobs
+# Submit jobs
 JOB_IDS=()
 
 echo "=== Submitting Sequential Jobs ==="

@@ -1,0 +1,225 @@
+================================================================================
+DISEÑO EXPERIMENTAL - QUICKSORT SECUENCIAL Y PARALELO (HYPERQUICKSORT)
+Proyecto Final - Programación Paralela y Distribuida
+================================================================================
+
+1. OBJETIVO DEL EXPERIMENTO
+--------------------------------------------------------------------------------
+Evaluar el rendimiento de dos implementaciones del algoritmo QuickSort para
+ordenar jugadores de ajédat por rating promedio:
+- Versión secuencial (1 procesador)
+- Versión paralela (Hyperquicksort con MPI)
+
+El objetivo es cuantificar el speedup, eficiencia y escalabilidad de la
+versión paralela en comparación con la versión secuencial.
+
+
+2. CONFIGURACIÓN DEL HARDWARE - CLUSTER CCAD (MULATONA)
+--------------------------------------------------------------------------------
+- Nodos de cómputo: 7 nodos Intel Xeon E5-2660 v3 (Broadwell)
+  - 32 cores por nodo
+  - 128 GB RAM por nodo
+  - Nodos disponibles durante experimentos: 3-4 nodos (bdw02, bdw04-06)
+- Interconexión: InfiniBand
+- Sistema: SLURM 22.05.x
+- Partición: short (límite 1 hora por job)
+
+
+3. TAMAÑOS DEL CONJUNTO DE DATOS
+--------------------------------------------------------------------------------
+Se seleccionaron 5 tamaños distribuidos logarítmicamente desde 100k hasta 5M:
+
+| Tamaño | Valor (N) | Razón |
+|--------|-----------|--------|
+| 100k   | 100,000   | Base rápida para validar implementación |
+| 250k   | 250,000   | ~2.5× anterior - punto intermedio |
+| 750k   | 750,000   | ~3× anterior - tamaño medio |
+| 2M     | 2,000,000 | ~2.7× anterior - carga significativa |
+| 5M     | 5,000,000 | ~2.5× anterior - máximo estrés |
+
+Estos tamaños permiten:
+- Observar comportamiento con datos pequeños (cache-friendly)
+- Observar comportamiento con datos grandes (memoria-bound)
+- Capturar transiciones de rendimiento en escala logarítmica
+
+
+4. CONFIGURACIONES DE PROCESADORES
+--------------------------------------------------------------------------------
+Número de procesos MPI (p): 1, 2, 4, 8, 16, 32
+
+- p=1: Versión secuencial (baseline para speedup)
+- p=2, 4, 8, 16, 32: Versión paralela
+
+Nota: Se usa --oversubscribe de MPI para permitir p>32, aunque las
+mediciones se limitan a p≤32 para mantener consistencia.
+
+El algoritmo Hyperquicksort requiere potencias de 2 para su comunicación
+en hipercubo, por lo que se usan valores como 2, 4, 8, 16, 32.
+
+
+5. REPETICIONES
+--------------------------------------------------------------------------------
+Cada configuración (tamaño × procesos) se ejecuta 3 veces.
+
+Propósito:
+- Calcular promedio de tiempo de ejecución
+- Calcular desviación estándar
+- Detectar anomalías o outliers
+
+
+6. MÉTRICAS A MEDIR
+--------------------------------------------------------------------------------
+
+6.1 Tiempo de Ejecución (T_s y T_p)
+- Medición: cronómetro de alta resolución (MPI_Wtime() para paralelo,
+  std::chrono para secuencial)
+- Unidades: milisegundos (ms) y segundos (s)
+- Se mide:
+  * Tiempo de generación de datos (no incluido en análisis)
+  * Tiempo de ordenamiento (métrica principal)
+  * Tiempo total (generación + ordenamiento)
+
+6.2 Speedup S(p)
+- Fórmula: S(p) = T_s / T_p
+- Donde T_s es el tiempo secuencial para el mismo tamaño
+- Referencia teórica: S_ideal(p) = p (speedup lineal)
+- Medición: Promedio de 3 ejecuciones con propagación de error
+
+6.3 Eficiencia E(p)
+- Fórmula: E(p) = (S(p) / p) × 100%
+- Referencia teórica: E_ideal = 100%
+- Indica qué porcentaje del potencial paralelo se utiliza
+
+6.4 Escalabilidad Strong Scaling
+- Definición: Tamaño fijo, varía p
+- Se mide T_p para cada p con tamaño constante
+- Referencia teórica: T_ideal(p) = T_s / p
+- Muestra cómo el tiempo disminuye al agregar procesadores
+
+6.5 Escalabilidad Weak Scaling
+- Definición: Tamaño crece proporcionalmente a p
+- Se mide T_p cuando N ∝ p (no implementado directamente, se infiere)
+- Referencia teórica: T_ideal = constante
+- Muestra cómo el algoritmo escala con el tamaño del problema
+
+
+7. CRITERIOS DEL DISEÑO EXPERIMENTAL
+--------------------------------------------------------------------------------
+
+7.1 ¿Por qué estos tamaños?
+- 100k: Ejecuta en segundos, permite validar rápidamente que la
+  implementación es correcta
+- 5M: Máximo que puede ejecutarse en tiempo razonable (~15 min secuencial)
+  dentro del límite de 30 min de la partición short
+- Distribución logarítmica: Captura comportamiento en diferentes órdenes
+  de magnitud sin requiring excesivos puntos intermedios
+
+7.2 ¿Por qué estos valores de p?
+- Potencias de 2: Requeridas por Hyperquicksort (comunicación en hipercubo)
+- p hasta 32: Un nodo tiene 32 cores, p=32 usa el nodo completamente
+- p=1 como baseline: Necesario para calcular speedup
+
+7.3 ¿Por qué 3 repeticiones?
+- Equilibrio entre estadística significativa y tiempo de experimentación
+- Con 3 repeticiones se puede calcular media y desviación estándar
+- 105 configuraciones totales × 3 = 315 jobs ~ 2-3 horas en cluster
+
+7.4 ¿Por qué --oversubscribe?
+- Permite probar p=32 en un nodo con 32 cores sin problemas de asignación
+- MPI gestiona la sobresuscripción transparentemente
+- No afecta significativamente las mediciones para p≤32
+
+
+8. RESULTADOS ESPERADOS (BASE DON DE DATOS DE 100k)
+--------------------------------------------------------------------------------
+
+| Configuración | Tiempo Sort (ms) | Observación |
+|---------------|------------------|-------------|
+| Secuencial | 108.23 ± 5.76 | Baseline |
+| p=2 | 61.96 ± 1.92 | Speedup ~1.75× |
+| p=4 | 93.70 ± 15.54 | Overhead de comunicación |
+| p=8 | 94.32 ± 3.62 | Similar a p=4 |
+| p=16 | 98.11 ± 2.74 | Ligero degradación |
+| p=32 | 98.72 ± 0.25 | Mínima mejora |
+
+Para N=5M (expectativas basadas en experimentos anteriores):
+- Secuencial: ~8 minutos (~480 segundos)
+- Paralelo p=8: ~79 segundos
+- Speedup p=8: ~6× para 5M
+
+
+9. PROCEDIMIENTO DE EJECUCIÓN
+--------------------------------------------------------------------------------
+
+9.1 Compilación
+```bash
+# En login node del cluster
+cd ~/hyperquicksort
+
+# Secuencial
+g++ -O3 -std=c++17 quicksort_seq.cpp -o quicksort_seq
+
+# Paralelo
+cd /path/to/hyperquicksort
+export PATH=/ccad/stack/23.02/base/linux-rocky9-broadwell/gcc-12.2.0/openmpi-4.1.4-olpnqaqkqy7xxf26653hwdpsc42tno6w/bin:$PATH
+export LD_LIBRARY_PATH=/ccad/stack/23.02/base/linux-rocky9-broadwell/gcc-12.2.0/openmpi-4.1.4-olpnqaqkqy7xxf26653hwdpsc42tno6w/lib:$LD_LIBRARY_PATH
+mpicxx -O3 -std=c++17 -o hyperquicksort hyperquicksort.cpp
+```
+
+9.2 Ejecución de experimentos
+```bash
+# En el cluster (NO en login node)
+cd ~/hyperquicksort/experiments/scripts
+
+# Un tamaño específico
+./run_100k.sh    # 100k jugadores
+./run_250k.sh    # 250k jugadores
+./run_750k.sh    # 750k jugadores
+./run_2M.sh      # 2M jugadores
+./run_5M.sh      # 5M jugadores
+
+# O todos los tamaños
+./run_experiments_cluster.sh
+```
+
+9.3 Recolectar resultados
+```bash
+# Copiar outputs a local
+scp -r cursoppyd4@mulatona.ccad.unc.edu.ar:~/hyperquicksort/experiments/results \
+      ~/path/to/proyecto_final_quicksort/experiments/
+
+# Procesar
+cd ~/path/to/proyecto_final_quicksort/experiments/scripts
+python3 collect_results.py
+```
+
+9.4 Generar gráficos
+```bash
+python3 plot_results.py
+```
+
+
+10. EXPECTATIVAS DE RESULTADOS
+--------------------------------------------------------------------------------
+
+10.1 Speedup
+- Para N pequeño (100k): Speedup limitado por overhead de comunicación
+- Para N grande (5M): Speedup significativo, cercano a lineal para p≤8
+- p>8: Overhead puede dominar para N pequeños
+
+10.2 Eficiencia
+- Idealmente 100% para p pequeño con N grande
+- De degradarse para p>16 debido a overhead de comunicación
+- Mejor para N grande (5M) que para N pequeño (100k)
+
+10.3 Escalabilidad
+- Strong scaling: Mejor rendimiento para N grande
+- Para N=5M, se espera T_p ≈ T_s / p para p≤8
+
+
+11. ANÁLISIS DE RENDIMIENTO - QUICKSORT SECUENCIAL VS PARALELO
+================================================================================
+
+Este documento describe el diseño experimental para evaluar el rendimiento
+de implementaciones de QuickSort (secuencial y Hyperquicksort paralelo) en
+el cluster CCAD de la Universidad Nacional de Córdoba.

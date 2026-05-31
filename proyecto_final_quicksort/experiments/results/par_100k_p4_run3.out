@@ -1,0 +1,44 @@
+Generating 100000 random players...
+Loaded 100000 players across 4 processors
+Distribution time: 60.5682 ms
+Sorting with Hyperquicksort...
+Sort time: 80.0416 ms
+Total time: 140.66 ms
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WFM   | Teimour, Yangyi                 | 2843 | 2839  | 2838  | 2840.0
+2     | WIM   | Richard, Rapport                | 2847 | 2834  | 2837  | 2839.3
+3     | WIM   | Dmitry, Caruana                 | 2844 | 2836  | 2835  | 2838.3
+4     | WGM   | Maxime, Aronian                 | 2848 | 2818  | 2848  | 2838.0
+5     | -     | Richard, Nakamura               | 2823 | 2833  | 2845  | 2833.7
+6     | CM    | Fabiano, Aronian                | 2846 | 2816  | 2838  | 2833.3
+7     | FM    | Levon, Caruana                  | 2811 | 2848  | 2840  | 2833.0
+8     | FM    | Dmitry, Aronian                 | 2833 | 2827  | 2837  | 2832.3
+9     | GM    | Shakhriyar, Karjakin            | 2835 | 2821  | 2834  | 2830.0
+10    | FM    | Hikaru, Carlsen                 | 2841 | 2843  | 2803  | 2829.0
+11    | FM    | Sergey, Giri                    | 2841 | 2793  | 2850  | 2828.0
+12    | IM    | Fabiano, Grischuk               | 2830 | 2805  | 2845  | 2826.7
+13    | WFM   | Shakhriyar, Gujrathi            | 2803 | 2844  | 2833  | 2826.7
+14    | GM    | Hikaru, Andreikin               | 2822 | 2843  | 2814  | 2826.3
+15    | WIM   | Ian, Giri                       | 2849 | 2835  | 2793  | 2825.7
+16    | WIM   | Levon, Carlsen                  | 2795 | 2831  | 2844  | 2823.3
+17    | WIM   | Sergey, Yangyi                  | 2807 | 2817  | 2846  | 2823.3
+18    | WGM   | Richard, Rapport                | 2805 | 2848  | 2817  | 2823.3
+19    | CM    | Alexander, Radjabov             | 2810 | 2825  | 2832  | 2822.3
+20    | IM    | Ian, Yangyi                     | 2850 | 2777  | 2840  | 2822.3
+
+Full results saved to results/sorted_players_p4.csv
+
+Job Metrics:
+Job ID: 290610
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:00:02
+CPU Efficiency: 12.50% of 00:00:16 core-walltime
+Job Wall-clock time: 00:00:04
+Memory Utilized: 392.10 MB
+Memory Efficiency: 2.51% of 15.25 GB (3.81 GB/core)
