@@ -1,0 +1,87 @@
+Generating 2000000 random players...
+Loaded 2000000 players across 32 processors
+Distribution time: 1558.11 ms
+Sorting with Hyperquicksort...
+Distribution time: 1558.11 ms
+Sort time: 12039.5 ms
+Total time: 13598.2 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 12039.50
+1        | 0          | 12040.12
+2        | 0          | 12040.10
+3        | 0          | 12040.09
+4        | 0          | 12040.11
+5        | 0          | 12040.09
+6        | 0          | 12040.09
+7        | 0          | 12040.04
+8        | 0          | 12040.12
+9        | 0          | 12040.09
+10       | 0          | 12040.06
+11       | 0          | 12040.06
+12       | 0          | 12040.07
+13       | 0          | 12040.06
+14       | 0          | 12040.06
+15       | 1000790    | 12040.04
+16       | 0          | 12040.14
+17       | 0          | 12040.12
+18       | 0          | 12040.10
+19       | 0          | 12040.09
+20       | 0          | 12040.12
+21       | 0          | 12040.09
+22       | 0          | 12040.09
+23       | 0          | 12040.05
+24       | 0          | 12040.12
+25       | 0          | 12040.10
+26       | 0          | 12040.06
+27       | 0          | 12040.07
+28       | 0          | 12040.07
+29       | 0          | 12040.28
+30       | 0          | 12040.06
+31       | 999210     | 12040.03
+
+Min time: 12039.5 ms
+Max time: 12040.3 ms
+Avg time: 12040.1 ms
+Imbalance: 0.00647207 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | -     | Vidit, Aronian                  | 2849 | 2850  | 2840  | 2846.3
+2     | -     | Shakhriyar, Yangyi              | 2838 | 2850  | 2848  | 2845.3
+3     | FM    | Anish, Liren                    | 2846 | 2849  | 2839  | 2844.7
+4     | WGM   | Teimour, Vachier-Lagrave        | 2844 | 2845  | 2844  | 2844.3
+5     | CM    | Hikaru, Gujrathi                | 2844 | 2850  | 2837  | 2843.7
+6     | WGM   | Hikaru, Aronian                 | 2847 | 2836  | 2844  | 2842.3
+7     | WFM   | Wesley, Duda                    | 2845 | 2843  | 2839  | 2842.3
+8     | WGM   | Viswanathan, Nakamura           | 2842 | 2848  | 2836  | 2842.0
+9     | CM    | Dmitry, Nepomniachtchi          | 2846 | 2845  | 2835  | 2842.0
+10    | WGM   | Maxime, Duda                    | 2842 | 2835  | 2848  | 2841.7
+11    | WIM   | Vidit, Liren                    | 2843 | 2833  | 2849  | 2841.7
+12    | WFM   | Yu, Mamedyarov                  | 2830 | 2847  | 2848  | 2841.7
+13    | WFM   | Anish, Karjakin                 | 2845 | 2842  | 2837  | 2841.3
+14    | WIM   | Magnus, Carlsen                 | 2843 | 2837  | 2841  | 2840.3
+15    | FM    | Sergey, Grischuk                | 2844 | 2830  | 2846  | 2840.0
+16    | -     | Ian, Nakamura                   | 2850 | 2837  | 2833  | 2840.0
+17    | IM    | Dmitry, Karjakin                | 2830 | 2844  | 2846  | 2840.0
+18    | GM    | Alexander, Vachier-Lagrave      | 2846 | 2838  | 2836  | 2840.0
+19    | FM    | Ian, Aronian                    | 2839 | 2836  | 2844  | 2839.7
+20    | FM    | Alexander, Vachier-Lagrave      | 2844 | 2832  | 2843  | 2839.7
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290773
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:07:34
+CPU Efficiency: 64.49% of 00:11:44 core-walltime
+Job Wall-clock time: 00:00:22
+Memory Utilized: 2.17 GB
+Memory Efficiency: 1.78% of 122.00 GB (3.81 GB/core)

@@ -1,0 +1,87 @@
+Generating 750000 random players...
+Loaded 750000 players across 32 processors
+Distribution time: 595.717 ms
+Sorting with Hyperquicksort...
+Distribution time: 595.717 ms
+Sort time: 1411.52 ms
+Total time: 2007.34 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 1411.52
+1        | 0          | 1411.61
+2        | 0          | 1411.61
+3        | 0          | 1411.60
+4        | 0          | 1411.62
+5        | 0          | 1411.60
+6        | 0          | 1411.61
+7        | 0          | 1411.60
+8        | 0          | 1411.61
+9        | 0          | 1411.60
+10       | 0          | 1411.61
+11       | 0          | 1411.60
+12       | 0          | 1411.61
+13       | 0          | 1411.60
+14       | 0          | 1411.61
+15       | 375463     | 1411.60
+16       | 0          | 1411.62
+17       | 0          | 1411.61
+18       | 0          | 1411.61
+19       | 0          | 1411.60
+20       | 0          | 1411.61
+21       | 0          | 1411.61
+22       | 0          | 1411.62
+23       | 0          | 1411.60
+24       | 0          | 1411.61
+25       | 0          | 1411.60
+26       | 0          | 1411.62
+27       | 0          | 1411.60
+28       | 0          | 1411.61
+29       | 0          | 1411.61
+30       | 0          | 1411.62
+31       | 374537     | 1411.59
+
+Min time: 1411.52 ms
+Max time: 1411.62 ms
+Avg time: 1411.6 ms
+Imbalance: 0.00746524 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WFM   | Richard, Vachier-Lagrave        | 2850 | 2846  | 2837  | 2844.3
+2     | GM    | Sergey, Karjakin                | 2842 | 2844  | 2846  | 2844.0
+3     | WFM   | Maxime, Radjabov                | 2844 | 2842  | 2844  | 2843.3
+4     | GM    | Yu, Rapport                     | 2841 | 2843  | 2844  | 2842.7
+5     | IM    | Viswanathan, Carlsen            | 2846 | 2834  | 2846  | 2842.0
+6     | WIM   | Maxime, Giri                    | 2841 | 2835  | 2848  | 2841.3
+7     | -     | Shakhriyar, Yangyi              | 2842 | 2841  | 2839  | 2840.7
+8     | IM    | Richard, Duda                   | 2850 | 2850  | 2820  | 2840.0
+9     | -     | Dmitry, Duda                    | 2843 | 2847  | 2830  | 2840.0
+10    | WGM   | Viswanathan, Rapport            | 2841 | 2849  | 2828  | 2839.3
+11    | GM    | Yu, Kramnik                     | 2847 | 2838  | 2832  | 2839.0
+12    | WGM   | Alexander, Duda                 | 2840 | 2827  | 2848  | 2838.3
+13    | FM    | Vladimir, Grischuk              | 2838 | 2844  | 2830  | 2837.3
+14    | -     | Wesley, Liren                   | 2842 | 2833  | 2837  | 2837.3
+15    | CM    | Sergey, Nakamura                | 2844 | 2826  | 2840  | 2836.7
+16    | WIM   | Dmitry, So                      | 2840 | 2840  | 2829  | 2836.3
+17    | WFM   | Vladimir, Kramnik               | 2849 | 2834  | 2826  | 2836.3
+18    | WGM   | Teimour, Radjabov               | 2842 | 2822  | 2844  | 2836.0
+19    | WGM   | Hikaru, Caruana                 | 2838 | 2847  | 2819  | 2834.7
+20    | WFM   | Hikaru, Vachier-Lagrave         | 2841 | 2839  | 2824  | 2834.7
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290756
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:01:21
+CPU Efficiency: 28.12% of 00:04:48 core-walltime
+Job Wall-clock time: 00:00:09
+Memory Utilized: 1.24 GB
+Memory Efficiency: 1.02% of 122.00 GB (3.81 GB/core)

@@ -1,0 +1,57 @@
+Generating 250000 random players...
+Loaded 250000 players across 2 processors
+Distribution time: 157.193 ms
+Sorting with Hyperquicksort...
+Distribution time: 157.193 ms
+Sort time: 186.894 ms
+Total time: 344.126 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 125019     | 186.89
+1        | 124981     | 186.94
+
+Min time: 186.894 ms
+Max time: 186.935 ms
+Avg time: 186.915 ms
+Imbalance: 0.0217947 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | IM    | Viswanathan, Liren              | 2848 | 2848  | 2836  | 2844.0
+2     | IM    | Viswanathan, Duda               | 2846 | 2847  | 2831  | 2841.3
+3     | FM    | Viswanathan, Liren              | 2849 | 2824  | 2850  | 2841.0
+4     | WFM   | Vladimir, Nakamura              | 2826 | 2845  | 2849  | 2840.0
+5     | -     | Fabiano, Radjabov               | 2844 | 2831  | 2845  | 2840.0
+6     | GM    | Shakhriyar, Duda                | 2850 | 2836  | 2830  | 2838.7
+7     | -     | Viswanathan, So                 | 2834 | 2842  | 2836  | 2837.3
+8     | CM    | Wesley, Radjabov                | 2818 | 2843  | 2848  | 2836.3
+9     | WFM   | Magnus, Mamedyarov              | 2843 | 2843  | 2823  | 2836.3
+10    | CM    | Vidit, Mamedyarov               | 2823 | 2832  | 2848  | 2834.3
+11    | CM    | Sergey, Radjabov                | 2804 | 2849  | 2848  | 2833.7
+12    | FM    | Maxime, Karjakin                | 2822 | 2836  | 2841  | 2833.0
+13    | WGM   | Maxime, Andreikin               | 2837 | 2829  | 2832  | 2832.7
+14    | CM    | Vidit, Caruana                  | 2849 | 2850  | 2799  | 2832.7
+15    | FM    | Anish, Giri                     | 2800 | 2850  | 2846  | 2832.0
+16    | WFM   | Alexander, Nakamura             | 2843 | 2816  | 2835  | 2831.3
+17    | GM    | Anish, Nepomniachtchi           | 2835 | 2827  | 2831  | 2831.0
+18    | FM    | Teimour, Giri                   | 2848 | 2795  | 2850  | 2831.0
+19    | IM    | Fabiano, Aronian                | 2828 | 2832  | 2827  | 2829.0
+20    | FM    | Ding, Grischuk                  | 2823 | 2844  | 2817  | 2828.0
+
+Full results saved to results/sorted_players_p2.csv
+
+Job Metrics:
+Job ID: 290726
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 2
+CPU Utilized: 00:00:02
+CPU Efficiency: 50.00% of 00:00:04 core-walltime
+Job Wall-clock time: 00:00:02
+Memory Utilized: 300.29 MB
+Memory Efficiency: 3.85% of 7.62 GB (3.81 GB/core)

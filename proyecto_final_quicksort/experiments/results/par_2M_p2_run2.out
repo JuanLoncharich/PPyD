@@ -1,0 +1,57 @@
+Generating 2000000 random players...
+Loaded 2000000 players across 2 processors
+Distribution time: 1342.79 ms
+Sorting with Hyperquicksort...
+Distribution time: 1342.79 ms
+Sort time: 9358.74 ms
+Total time: 10701.6 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 1001309    | 9358.74
+1        | 998691     | 9358.84
+
+Min time: 9358.74 ms
+Max time: 9358.84 ms
+Avg time: 9358.79 ms
+Imbalance: 0.0010938 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | GM    | Vladimir, Yangyi                | 2850 | 2849  | 2839  | 2846.0
+2     | WFM   | Yu, Anand                       | 2841 | 2846  | 2846  | 2844.3
+3     | WFM   | Maxime, So                      | 2839 | 2846  | 2847  | 2844.0
+4     | WFM   | Sergey, Caruana                 | 2842 | 2843  | 2845  | 2843.3
+5     | FM    | Wesley, Anand                   | 2847 | 2834  | 2848  | 2843.0
+6     | IM    | Vladimir, Nakamura              | 2845 | 2846  | 2838  | 2843.0
+7     | CM    | Vidit, Rapport                  | 2840 | 2842  | 2847  | 2843.0
+8     | FM    | Hikaru, Anand                   | 2850 | 2830  | 2848  | 2842.7
+9     | WGM   | Vladimir, Aronian               | 2848 | 2837  | 2841  | 2842.0
+10    | WFM   | Fabiano, Carlsen                | 2842 | 2840  | 2844  | 2842.0
+11    | IM    | Sergey, Liren                   | 2849 | 2834  | 2841  | 2841.3
+12    | GM    | Yu, Vachier-Lagrave             | 2836 | 2843  | 2844  | 2841.0
+13    | GM    | Yu, Grischuk                    | 2849 | 2845  | 2829  | 2841.0
+14    | GM    | Wesley, Carlsen                 | 2847 | 2845  | 2831  | 2841.0
+15    | GM    | Alexander, Duda                 | 2850 | 2834  | 2839  | 2841.0
+16    | IM    | Anish, Nakamura                 | 2843 | 2840  | 2839  | 2840.7
+17    | WFM   | Richard, Karjakin               | 2848 | 2836  | 2838  | 2840.7
+18    | WGM   | Anish, Gujrathi                 | 2833 | 2848  | 2840  | 2840.3
+19    | WIM   | Shakhriyar, Nakamura            | 2829 | 2840  | 2850  | 2839.7
+20    | -     | Teimour, Vachier-Lagrave        | 2847 | 2848  | 2823  | 2839.3
+
+Full results saved to results/sorted_players_p2.csv
+
+Job Metrics:
+Job ID: 290762
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 2
+CPU Utilized: 00:00:25
+CPU Efficiency: 83.33% of 00:00:30 core-walltime
+Job Wall-clock time: 00:00:15
+Memory Utilized: 975.79 MB
+Memory Efficiency: 12.50% of 7.62 GB (3.81 GB/core)

@@ -1,44 +1,87 @@
 Generating 100000 random players...
 Loaded 100000 players across 32 processors
-Distribution time: 119.212 ms
+Distribution time: 62.3209 ms
 Sorting with Hyperquicksort...
-Sort time: 99.0042 ms
-Total time: 218.253 ms
+Distribution time: 62.3209 ms
+Sort time: 114.701 ms
+Total time: 177.088 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 114.70
+1        | 0          | 114.86
+2        | 0          | 106.60
+3        | 0          | 114.86
+4        | 0          | 114.77
+5        | 0          | 114.86
+6        | 0          | 106.60
+7        | 0          | 114.86
+8        | 0          | 114.77
+9        | 0          | 114.86
+10       | 0          | 106.60
+11       | 0          | 114.86
+12       | 0          | 114.77
+13       | 0          | 114.86
+14       | 0          | 106.60
+15       | 50077      | 114.86
+16       | 0          | 114.77
+17       | 0          | 114.86
+18       | 0          | 106.60
+19       | 0          | 114.86
+20       | 0          | 114.77
+21       | 0          | 114.86
+22       | 0          | 106.60
+23       | 0          | 114.86
+24       | 0          | 114.77
+25       | 0          | 114.86
+26       | 0          | 106.60
+27       | 0          | 114.86
+28       | 0          | 114.77
+29       | 0          | 114.86
+30       | 0          | 106.60
+31       | 49923      | 114.86
+
+Min time: 106.598 ms
+Max time: 114.864 ms
+Avg time: 112.771 ms
+Imbalance: 7.1962 %
+----------------------------------------
 
 Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
 --------------------------------------------------------------------------------
-1     | IM    | Anish, Vachier-Lagrave          | 2849 | 2822  | 2834  | 2835.0
-2     | CM    | Viswanathan, Nakamura           | 2831 | 2828  | 2841  | 2833.3
-3     | WFM   | Levon, Nepomniachtchi           | 2837 | 2843  | 2820  | 2833.3
-4     | WIM   | Shakhriyar, Mamedyarov          | 2839 | 2850  | 2809  | 2832.7
-5     | IM    | Wesley, Nakamura                | 2831 | 2839  | 2828  | 2832.7
-6     | GM    | Vidit, So                       | 2830 | 2835  | 2833  | 2832.7
-7     | CM    | Vladimir, Caruana               | 2838 | 2839  | 2820  | 2832.3
-8     | WFM   | Levon, Duda                     | 2839 | 2812  | 2837  | 2829.3
-9     | IM    | Richard, Rapport                | 2841 | 2801  | 2842  | 2828.0
-10    | WGM   | Shakhriyar, Karjakin            | 2816 | 2844  | 2817  | 2825.7
-11    | WGM   | Wesley, Karjakin                | 2841 | 2845  | 2790  | 2825.3
-12    | IM    | Alexander, Aronian              | 2826 | 2822  | 2828  | 2825.3
-13    | WIM   | Maxime, Aronian                 | 2819 | 2805  | 2850  | 2824.7
-14    | WFM   | Levon, Kramnik                  | 2839 | 2783  | 2850  | 2824.0
-15    | FM    | Wesley, Radjabov                | 2817 | 2846  | 2807  | 2823.3
-16    | WGM   | Teimour, So                     | 2804 | 2826  | 2839  | 2823.0
-17    | FM    | Anish, Grischuk                 | 2846 | 2817  | 2805  | 2822.7
-18    | WFM   | Teimour, Gujrathi               | 2771 | 2847  | 2850  | 2822.7
-19    | WGM   | Levon, Kramnik                  | 2850 | 2795  | 2821  | 2822.0
-20    | WIM   | Teimour, Duda                   | 2815 | 2818  | 2831  | 2821.3
+1     | GM    | Alexander, Duda                 | 2828 | 2840  | 2843  | 2837.0
+2     | CM    | Yu, Aronian                     | 2823 | 2847  | 2838  | 2836.0
+3     | WFM   | Ian, Liren                      | 2832 | 2840  | 2819  | 2830.3
+4     | -     | Viswanathan, Vachier-Lagrave    | 2832 | 2846  | 2812  | 2830.0
+5     | -     | Fabiano, Rapport                | 2850 | 2807  | 2831  | 2829.3
+6     | GM    | Sergey, Carlsen                 | 2844 | 2845  | 2794  | 2827.7
+7     | WFM   | Hikaru, Aronian                 | 2832 | 2845  | 2805  | 2827.3
+8     | WIM   | Teimour, Duda                   | 2818 | 2832  | 2829  | 2826.3
+9     | FM    | Richard, Vachier-Lagrave        | 2785 | 2848  | 2845  | 2826.0
+10    | CM    | Wesley, Yangyi                  | 2849 | 2799  | 2823  | 2823.7
+11    | WGM   | Vladimir, Liren                 | 2846 | 2779  | 2841  | 2822.0
+12    | WIM   | Dmitry, Giri                    | 2816 | 2821  | 2828  | 2821.7
+13    | IM    | Jan, Giri                       | 2824 | 2835  | 2804  | 2821.0
+14    | FM    | Ding, Rapport                   | 2825 | 2835  | 2803  | 2821.0
+15    | IM    | Levon, Anand                    | 2839 | 2813  | 2809  | 2820.3
+16    | FM    | Richard, Karjakin               | 2784 | 2837  | 2840  | 2820.3
+17    | -     | Dmitry, Karjakin                | 2800 | 2825  | 2835  | 2820.0
+18    | -     | Vidit, So                       | 2771 | 2845  | 2843  | 2819.7
+19    | WIM   | Alexander, Gujrathi             | 2830 | 2836  | 2792  | 2819.3
+20    | FM    | Fabiano, Radjabov               | 2845 | 2786  | 2827  | 2819.3
 
 Full results saved to results/sorted_players_p32.csv
 
 Job Metrics:
-Job ID: 290618
+Job ID: 290720
 Cluster: bdw
 User/Group: cursoppyd4/cursoppyd4
 State: COMPLETED (exit code 0)
 Nodes: 1
 Cores per node: 32
-CPU Utilized: 00:00:22
-CPU Efficiency: 11.46% of 00:03:12 core-walltime
+CPU Utilized: 00:00:21
+CPU Efficiency: 10.94% of 00:03:12 core-walltime
 Job Wall-clock time: 00:00:06
-Memory Utilized: 617.15 MB
-Memory Efficiency: 0.49% of 122.00 GB (3.81 GB/core)
+Memory Utilized: 601.78 MB
+Memory Efficiency: 0.48% of 122.00 GB (3.81 GB/core)

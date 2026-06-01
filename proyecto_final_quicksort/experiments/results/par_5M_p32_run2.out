@@ -1,0 +1,87 @@
+Generating 5000000 random players...
+Loaded 5000000 players across 32 processors
+Distribution time: 4634.43 ms
+Sorting with Hyperquicksort...
+Distribution time: 4634.43 ms
+Sort time: 75474 ms
+Total time: 80109.2 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 75474.05
+1        | 0          | 75474.78
+2        | 0          | 75474.79
+3        | 0          | 75474.75
+4        | 0          | 75474.77
+5        | 0          | 75474.77
+6        | 0          | 75474.77
+7        | 0          | 75474.76
+8        | 0          | 75474.78
+9        | 0          | 75474.77
+10       | 0          | 75474.78
+11       | 0          | 75474.76
+12       | 0          | 75474.76
+13       | 0          | 75474.76
+14       | 0          | 75474.76
+15       | 2500817    | 75474.75
+16       | 0          | 75474.81
+17       | 0          | 75474.79
+18       | 0          | 75474.79
+19       | 0          | 75474.75
+20       | 0          | 75474.78
+21       | 0          | 75474.77
+22       | 0          | 75474.77
+23       | 0          | 75474.76
+24       | 0          | 75474.78
+25       | 0          | 75474.77
+26       | 0          | 75474.77
+27       | 0          | 75474.75
+28       | 0          | 75474.76
+29       | 0          | 75474.76
+30       | 0          | 75474.76
+31       | 2499183    | 75474.75
+
+Min time: 75474 ms
+Max time: 75474.8 ms
+Avg time: 75474.7 ms
+Imbalance: 0.00101761 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WIM   | Fabiano, Aronian                | 2847 | 2848  | 2849  | 2848.0
+2     | WGM   | Dmitry, Nakamura                | 2842 | 2848  | 2850  | 2846.7
+3     | -     | Vladimir, Radjabov              | 2845 | 2844  | 2850  | 2846.3
+4     | GM    | Jan, Aronian                    | 2850 | 2840  | 2847  | 2845.7
+5     | WFM   | Dmitry, Yangyi                  | 2849 | 2842  | 2845  | 2845.3
+6     | CM    | Ian, Carlsen                    | 2842 | 2850  | 2843  | 2845.0
+7     | GM    | Jan, Liren                      | 2847 | 2849  | 2839  | 2845.0
+8     | IM    | Alexander, Mamedyarov           | 2848 | 2840  | 2846  | 2844.7
+9     | CM    | Sergey, Kramnik                 | 2848 | 2850  | 2835  | 2844.3
+10    | CM    | Fabiano, Rapport                | 2842 | 2846  | 2844  | 2844.0
+11    | WGM   | Jan, Caruana                    | 2847 | 2847  | 2838  | 2844.0
+12    | GM    | Vladimir, Caruana               | 2849 | 2843  | 2840  | 2844.0
+13    | WGM   | Fabiano, Vachier-Lagrave        | 2837 | 2848  | 2846  | 2843.7
+14    | WFM   | Jan, Carlsen                    | 2841 | 2846  | 2844  | 2843.7
+15    | IM    | Anish, Nepomniachtchi           | 2850 | 2846  | 2835  | 2843.7
+16    | IM    | Wesley, Giri                    | 2840 | 2850  | 2839  | 2843.0
+17    | WFM   | Viswanathan, Radjabov           | 2836 | 2847  | 2846  | 2843.0
+18    | WIM   | Dmitry, Giri                    | 2837 | 2844  | 2847  | 2842.7
+19    | IM    | Richard, Liren                  | 2848 | 2846  | 2834  | 2842.7
+20    | CM    | Wesley, Karjakin                | 2834 | 2844  | 2850  | 2842.7
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290792
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:43:04
+CPU Efficiency: 86.83% of 00:49:36 core-walltime
+Job Wall-clock time: 00:01:33
+Memory Utilized: 4.78 GB
+Memory Efficiency: 3.92% of 122.00 GB (3.81 GB/core)

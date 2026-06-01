@@ -1,0 +1,87 @@
+Generating 5000000 random players...
+Loaded 5000000 players across 32 processors
+Distribution time: 4557.32 ms
+Sorting with Hyperquicksort...
+Distribution time: 4557.32 ms
+Sort time: 71866.3 ms
+Total time: 76423.9 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 71866.31
+1        | 0          | 71866.51
+2        | 0          | 71866.51
+3        | 0          | 71866.51
+4        | 0          | 71866.54
+5        | 0          | 71866.49
+6        | 0          | 71866.52
+7        | 0          | 71867.06
+8        | 0          | 71866.54
+9        | 0          | 71866.50
+10       | 0          | 71866.51
+11       | 0          | 71866.50
+12       | 0          | 71866.52
+13       | 0          | 71866.49
+14       | 0          | 71866.51
+15       | 2502522    | 71866.49
+16       | 0          | 71866.56
+17       | 0          | 71866.52
+18       | 0          | 71866.52
+19       | 0          | 71866.51
+20       | 0          | 71866.54
+21       | 0          | 71866.49
+22       | 0          | 71866.52
+23       | 0          | 71867.06
+24       | 0          | 71866.54
+25       | 0          | 71866.51
+26       | 0          | 71866.51
+27       | 0          | 71866.50
+28       | 0          | 71866.53
+29       | 0          | 71866.49
+30       | 0          | 71866.51
+31       | 2497478    | 71866.49
+
+Min time: 71866.3 ms
+Max time: 71867.1 ms
+Avg time: 71866.5 ms
+Imbalance: 0.00105307 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WGM   | Richard, Vachier-Lagrave        | 2850 | 2850  | 2848  | 2849.3
+2     | IM    | Maxime, So                      | 2850 | 2846  | 2848  | 2848.0
+3     | FM    | Viswanathan, Yangyi             | 2843 | 2847  | 2849  | 2846.3
+4     | WIM   | Alexander, Caruana              | 2846 | 2850  | 2843  | 2846.3
+5     | -     | Maxime, Anand                   | 2850 | 2845  | 2843  | 2846.0
+6     | WFM   | Magnus, Nakamura                | 2839 | 2849  | 2849  | 2845.7
+7     | CM    | Hikaru, So                      | 2843 | 2844  | 2849  | 2845.3
+8     | -     | Fabiano, Vachier-Lagrave        | 2844 | 2846  | 2846  | 2845.3
+9     | -     | Shakhriyar, Radjabov            | 2845 | 2842  | 2847  | 2844.7
+10    | WGM   | Viswanathan, Anand              | 2846 | 2849  | 2838  | 2844.3
+11    | WFM   | Dmitry, Nepomniachtchi          | 2848 | 2848  | 2837  | 2844.3
+12    | WFM   | Richard, Caruana                | 2846 | 2840  | 2846  | 2844.0
+13    | WGM   | Richard, Carlsen                | 2843 | 2847  | 2842  | 2844.0
+14    | WFM   | Yu, Aronian                     | 2850 | 2838  | 2843  | 2843.7
+15    | WGM   | Alexander, Giri                 | 2848 | 2837  | 2846  | 2843.7
+16    | CM    | Hikaru, Caruana                 | 2837 | 2844  | 2850  | 2843.7
+17    | CM    | Wesley, Gujrathi                | 2848 | 2848  | 2834  | 2843.3
+18    | -     | Alexander, Kramnik              | 2846 | 2844  | 2840  | 2843.3
+19    | WFM   | Fabiano, Nepomniachtchi         | 2844 | 2847  | 2838  | 2843.0
+20    | WGM   | Maxime, So                      | 2841 | 2840  | 2848  | 2843.0
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290793
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:41:07
+CPU Efficiency: 86.62% of 00:47:28 core-walltime
+Job Wall-clock time: 00:01:29
+Memory Utilized: 4.61 GB
+Memory Efficiency: 3.78% of 122.00 GB (3.81 GB/core)

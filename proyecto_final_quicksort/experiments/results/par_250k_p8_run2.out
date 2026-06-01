@@ -1,0 +1,63 @@
+Generating 250000 random players...
+Loaded 250000 players across 8 processors
+Distribution time: 169.256 ms
+Sorting with Hyperquicksort...
+Distribution time: 169.256 ms
+Sort time: 275.17 ms
+Total time: 444.499 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 275.17
+1        | 0          | 275.25
+2        | 0          | 275.24
+3        | 124867     | 275.25
+4        | 0          | 275.25
+5        | 0          | 275.25
+6        | 0          | 275.24
+7        | 125133     | 275.24
+
+Min time: 275.17 ms
+Max time: 275.249 ms
+Avg time: 275.236 ms
+Imbalance: 0.0285828 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WFM   | Jan, Yangyi                     | 2850 | 2849  | 2846  | 2848.3
+2     | CM    | Anish, Kramnik                  | 2847 | 2850  | 2837  | 2844.7
+3     | GM    | Ian, Grischuk                   | 2842 | 2838  | 2850  | 2843.3
+4     | -     | Yu, Gujrathi                    | 2842 | 2839  | 2845  | 2842.0
+5     | -     | Shakhriyar, Anand               | 2836 | 2838  | 2839  | 2837.7
+6     | WFM   | Alexander, Mamedyarov           | 2849 | 2814  | 2849  | 2837.3
+7     | GM    | Sergey, Kramnik                 | 2842 | 2846  | 2823  | 2837.0
+8     | WIM   | Alexander, So                   | 2849 | 2821  | 2835  | 2835.0
+9     | CM    | Viswanathan, So                 | 2850 | 2801  | 2850  | 2833.7
+10    | WIM   | Shakhriyar, Radjabov            | 2840 | 2830  | 2831  | 2833.7
+11    | -     | Dmitry, Vachier-Lagrave         | 2825 | 2839  | 2837  | 2833.7
+12    | WGM   | Yu, Yangyi                      | 2842 | 2839  | 2818  | 2833.0
+13    | FM    | Hikaru, Nepomniachtchi          | 2833 | 2822  | 2840  | 2831.7
+14    | IM    | Richard, Aronian                | 2804 | 2848  | 2843  | 2831.7
+15    | FM    | Jan, Rapport                    | 2847 | 2834  | 2813  | 2831.3
+16    | FM    | Wesley, Rapport                 | 2836 | 2842  | 2810  | 2829.3
+17    | WGM   | Levon, Rapport                  | 2838 | 2817  | 2833  | 2829.3
+18    | IM    | Dmitry, Nepomniachtchi          | 2816 | 2825  | 2847  | 2829.3
+19    | GM    | Dmitry, Kramnik                 | 2846 | 2837  | 2804  | 2829.0
+20    | -     | Dmitry, Aronian                 | 2816 | 2850  | 2820  | 2828.7
+
+Full results saved to results/sorted_players_p8.csv
+
+Job Metrics:
+Job ID: 290732
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:00:07
+CPU Efficiency: 17.50% of 00:00:40 core-walltime
+Job Wall-clock time: 00:00:05
+Memory Utilized: 320.10 MB
+Memory Efficiency: 1.02% of 30.50 GB (3.81 GB/core)

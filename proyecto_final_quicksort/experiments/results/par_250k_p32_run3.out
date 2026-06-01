@@ -1,0 +1,87 @@
+Generating 250000 random players...
+Loaded 250000 players across 32 processors
+Distribution time: 162.755 ms
+Sorting with Hyperquicksort...
+Distribution time: 162.755 ms
+Sort time: 286.175 ms
+Total time: 449.004 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 286.18
+1        | 0          | 286.25
+2        | 0          | 286.25
+3        | 0          | 286.24
+4        | 0          | 286.25
+5        | 0          | 286.25
+6        | 0          | 286.25
+7        | 0          | 286.24
+8        | 0          | 286.25
+9        | 0          | 286.24
+10       | 0          | 286.25
+11       | 0          | 286.24
+12       | 0          | 286.25
+13       | 0          | 286.24
+14       | 0          | 286.24
+15       | 124946     | 286.25
+16       | 0          | 286.25
+17       | 0          | 286.25
+18       | 0          | 286.25
+19       | 0          | 286.24
+20       | 0          | 286.25
+21       | 0          | 286.25
+22       | 0          | 286.24
+23       | 0          | 286.24
+24       | 0          | 286.25
+25       | 0          | 286.24
+26       | 0          | 286.25
+27       | 0          | 286.24
+28       | 0          | 286.24
+29       | 0          | 286.24
+30       | 0          | 286.24
+31       | 125054     | 286.24
+
+Min time: 286.175 ms
+Max time: 286.252 ms
+Avg time: 286.243 ms
+Imbalance: 0.0267317 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | CM    | Wesley, Anand                   | 2843 | 2850  | 2848  | 2847.0
+2     | CM    | Levon, Nepomniachtchi           | 2845 | 2839  | 2847  | 2843.7
+3     | WGM   | Dmitry, Nepomniachtchi          | 2844 | 2849  | 2837  | 2843.3
+4     | WFM   | Alexander, Giri                 | 2847 | 2843  | 2837  | 2842.3
+5     | IM    | Teimour, Kramnik                | 2845 | 2831  | 2840  | 2838.7
+6     | WGM   | Ding, Giri                      | 2832 | 2835  | 2843  | 2836.7
+7     | WGM   | Richard, Liren                  | 2845 | 2838  | 2826  | 2836.3
+8     | WGM   | Viswanathan, Caruana            | 2839 | 2834  | 2835  | 2836.0
+9     | IM    | Richard, Caruana                | 2846 | 2849  | 2809  | 2834.7
+10    | -     | Anish, Grischuk                 | 2846 | 2842  | 2815  | 2834.3
+11    | GM    | Levon, Gujrathi                 | 2849 | 2841  | 2813  | 2834.3
+12    | CM    | Alexander, Andreikin            | 2843 | 2826  | 2834  | 2834.3
+13    | WGM   | Fabiano, Anand                  | 2841 | 2816  | 2845  | 2834.0
+14    | -     | Viswanathan, Aronian            | 2842 | 2826  | 2832  | 2833.3
+15    | WIM   | Vidit, Mamedyarov               | 2844 | 2833  | 2818  | 2831.7
+16    | FM    | Fabiano, Gujrathi               | 2845 | 2819  | 2828  | 2830.7
+17    | CM    | Vladimir, Grischuk              | 2822 | 2827  | 2843  | 2830.7
+18    | WGM   | Fabiano, Giri                   | 2850 | 2812  | 2829  | 2830.3
+19    | WGM   | Wesley, Carlsen                 | 2840 | 2844  | 2806  | 2830.0
+20    | IM    | Maxime, Aronian                 | 2829 | 2811  | 2847  | 2829.0
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290739
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:00:30
+CPU Efficiency: 15.62% of 00:03:12 core-walltime
+Job Wall-clock time: 00:00:06
+Memory Utilized: 750.58 MB
+Memory Efficiency: 0.60% of 122.00 GB (3.81 GB/core)

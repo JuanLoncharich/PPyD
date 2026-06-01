@@ -1,0 +1,63 @@
+Generating 2000000 random players...
+Loaded 2000000 players across 8 processors
+Distribution time: 1622.49 ms
+Sorting with Hyperquicksort...
+Distribution time: 1622.49 ms
+Sort time: 13666.3 ms
+Total time: 15288.8 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 13666.27
+1        | 0          | 13666.32
+2        | 0          | 13666.34
+3        | 999885     | 13666.29
+4        | 0          | 13666.37
+5        | 0          | 13666.34
+6        | 0          | 13666.35
+7        | 1000115    | 13666.30
+
+Min time: 13666.3 ms
+Max time: 13666.4 ms
+Avg time: 13666.3 ms
+Imbalance: 0.000707693 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | -     | Wesley, So                      | 2845 | 2848  | 2849  | 2847.3
+2     | WIM   | Richard, Grischuk               | 2846 | 2848  | 2848  | 2847.3
+3     | GM    | Shakhriyar, Gujrathi            | 2848 | 2850  | 2842  | 2846.7
+4     | WGM   | Fabiano, Giri                   | 2841 | 2850  | 2847  | 2846.0
+5     | WIM   | Levon, Yangyi                   | 2843 | 2849  | 2845  | 2845.7
+6     | IM    | Viswanathan, Mamedyarov         | 2842 | 2849  | 2845  | 2845.3
+7     | -     | Ding, Kramnik                   | 2848 | 2845  | 2842  | 2845.0
+8     | WIM   | Ian, Nepomniachtchi             | 2847 | 2847  | 2840  | 2844.7
+9     | GM    | Fabiano, So                     | 2842 | 2845  | 2842  | 2843.0
+10    | WGM   | Ian, Duda                       | 2840 | 2838  | 2850  | 2842.7
+11    | FM    | Levon, Giri                     | 2848 | 2834  | 2846  | 2842.7
+12    | CM    | Sergey, Mamedyarov              | 2840 | 2847  | 2840  | 2842.3
+13    | WIM   | Magnus, Duda                    | 2840 | 2837  | 2848  | 2841.7
+14    | IM    | Shakhriyar, Carlsen             | 2842 | 2842  | 2841  | 2841.7
+15    | CM    | Maxime, So                      | 2839 | 2845  | 2841  | 2841.7
+16    | IM    | Levon, Aronian                  | 2840 | 2840  | 2845  | 2841.7
+17    | WIM   | Teimour, Vachier-Lagrave        | 2849 | 2849  | 2825  | 2841.0
+18    | GM    | Fabiano, Carlsen                | 2848 | 2849  | 2826  | 2841.0
+19    | IM    | Shakhriyar, Kramnik             | 2839 | 2847  | 2837  | 2841.0
+20    | GM    | Sergey, Rapport                 | 2843 | 2836  | 2843  | 2840.7
+
+Full results saved to results/sorted_players_p8.csv
+
+Job Metrics:
+Job ID: 290768
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:02:07
+CPU Efficiency: 79.38% of 00:02:40 core-walltime
+Job Wall-clock time: 00:00:20
+Memory Utilized: 1.42 GB
+Memory Efficiency: 4.65% of 30.50 GB (3.81 GB/core)

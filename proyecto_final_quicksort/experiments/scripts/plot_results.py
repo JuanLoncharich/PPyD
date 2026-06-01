@@ -2,13 +2,14 @@
 """
 plot_results.py - Generate performance analysis plots
 
-This script generates 6 plots:
+This script generates 7 plots:
 1. Execution Time (T_s and T_p)
 2. Speedup with theoretical reference (S = p)
 3. Efficiency with theoretical reference (E = 100%)
 4. Strong Scaling with theoretical reference (T = T_s / p)
 5. Weak Scaling with theoretical reference (T = constant)
-6. Load Balance per processor configuration
+6. Load Balance (imbalance %) per processor configuration
+7. Load Balance Detail (min/max/avg times) per processor configuration
 """
 
 import os
@@ -58,7 +59,7 @@ def load_results(results_dir: Path) -> Tuple[Dict, Dict]:
             if size not in parallel:
                 parallel[size] = {}
 
-            parallel[size][procs] = {
+            proc_data = {
                 'dist_mean': float(row['dist_time_ms_mean']),
                 'dist_std': float(row['dist_time_ms_std']),
                 'sort_mean': float(row['sort_time_ms_mean']),
@@ -66,6 +67,16 @@ def load_results(results_dir: Path) -> Tuple[Dict, Dict]:
                 'total_mean': float(row['total_time_ms_mean']),
                 'total_std': float(row['total_time_ms_std']),
             }
+
+            # Load balance metrics (may be empty if not available)
+            if row.get('lb_imbalance_mean') and row['lb_imbalance_mean'].strip():
+                proc_data['lb_min_mean'] = float(row['lb_min_time_mean'])
+                proc_data['lb_max_mean'] = float(row['lb_max_time_mean'])
+                proc_data['lb_avg_mean'] = float(row['lb_avg_time_mean'])
+                proc_data['lb_imbalance_mean'] = float(row['lb_imbalance_mean'])
+                proc_data['lb_imbalance_std'] = float(row['lb_imbalance_std']) if row['lb_imbalance_std'] else 0.0
+
+            parallel[size][procs] = proc_data
 
     return sequential, parallel
 
@@ -266,15 +277,15 @@ def plot_strong_scaling(sequential: Dict, parallel: Dict, output_dir: Path):
     ax.set_xlabel('Número de Procesos (p)', fontsize=12)
     ax.set_ylabel('Tiempo de Ejecución T_p (segundos)', fontsize=12)
     ax.set_title('Escalabilidad Strong Scaling (Tamaño Fijo)', fontsize=14, fontweight='bold')
-    ax.legend(loc='upper right', fontsize=10)
     ax.grid(True, alpha=0.3)
     ax.set_xticks(PROCS)
     ax.set_yscale('log')
 
-    # Add reference legend entry
-    ideal_patch = mpatches.Patch(color='gray', linestyle='--', label='Ideal (T = T_s / p)')
-    ax.legend(handles=[ideal_patch] + [ax.get_legend().get_patches()[0]],
-             loc='upper right', fontsize=10)
+    # Add reference line to legend
+    from matplotlib.lines import Line2D
+    ideal_line = Line2D([], [], color='gray', linestyle='--', linewidth=1.5, label='Ideal (T = T_s / p)')
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles=[ideal_line] + handles, loc='upper right', fontsize=10)
 
     plt.tight_layout()
     plt.savefig(output_dir / 'plots' / '04_strong_scaling.png', dpi=DPI)
@@ -346,58 +357,96 @@ def plot_weak_scaling(parallel: Dict, output_dir: Path):
 
 
 def plot_load_balance(parallel: Dict, output_dir: Path):
-    """Plot 6: Load Balance for each processor configuration."""
-    # Since we don't have per-processor timing data, we create a conceptual plot
-    # showing ideal distribution (N/p) vs what we'd expect with Hyperquicksort
+    """Plot 6: Load Balance (imbalance %) for each processor configuration."""
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    fig, axes = plt.subplots(2, 3, figsize=(15, 10))
-    axes = axes.flatten()
+    # Plot measured load imbalance for each size
+    for i, size in enumerate(SIZES):
+        x_vals = []
+        y_vals = []
+        y_errs = []
 
-    plot_idx = 0
-    for procs in [2, 4, 8, 16, 32, 1]:
-        if procs == 1:
-            continue
+        for procs in PROCS:
+            if procs == 1:
+                continue
 
-        ax = axes[plot_idx]
-        plot_idx += 1
+            if procs in parallel.get(size, {}) and 'lb_imbalance_mean' in parallel[size][procs]:
+                imbalance = parallel[size][procs]['lb_imbalance_mean']
+                imbalance_std = parallel[size][procs]['lb_imbalance_std']
 
-        # For each size, show theoretical distribution
-        for i, size in enumerate(SIZES):
-            if procs in parallel.get(size, {}):
-                # Theoretical perfect distribution
-                ideal_per_proc = size / procs
+                x_vals.append(procs)
+                y_vals.append(imbalance)
+                y_errs.append(imbalance_std)
 
-                # Create a bar chart showing processor IDs
-                proc_ids = list(range(procs))
+        if x_vals:
+            ax.errorbar(x_vals, y_vals, yerr=y_errs, marker=MARKERS[i], markersize=8,
+                       linewidth=2, capsize=5, label=f'N = {SIZE_NAMES[i]}', color=COLORS[i])
 
-                # Mock data: in Hyperquicksort, load is reasonably balanced
-                # We show the theoretical perfect distribution
-                sizes = [ideal_per_proc] * procs
+    # Add reference line for perfect balance (0% imbalance)
+    ax.axhline(y=0, color='k', linestyle='--', linewidth=2, label='Balance perfecto (0%)', zorder=0)
 
-                # Plot
-                x_pos = np.arange(procs)
-                offset = i * 0.2
-                ax.bar(x_pos + offset, sizes, width=0.15,
-                      label=f'N = {SIZE_NAMES[i]}', color=COLORS[i], alpha=0.8)
+    ax.set_xlabel('Número de Procesos (p)', fontsize=12)
+    ax.set_ylabel('Desbalance de Carga (%)', fontsize=12)
+    ax.set_title('Balanceo de Carga: Desbalance vs Número de Procesos', fontsize=14, fontweight='bold')
+    ax.legend(loc='upper right', fontsize=10)
+    ax.grid(True, alpha=0.3)
+    ax.set_xticks(PROCS)
 
-        ax.set_xlabel('ID del Proceso', fontsize=10)
-        ax.set_ylabel('Tamaño del Subarray (elementos)', fontsize=10)
-        ax.set_title(f'Distribución de Datos: p = {procs}', fontsize=12, fontweight='bold')
-        ax.set_xticks(x_pos)
-        ax.set_xticklabels([str(i) for i in range(procs)], fontsize=8)
-        ax.legend(fontsize=8)
-        ax.grid(True, alpha=0.3, axis='y')
-
-        # Add reference line for perfect balance
-        if procs in parallel.get(SIZES[0], {}):
-            perfect_size = SIZES[0] / procs
-            ax.axhline(y=perfect_size, color='k', linestyle='--', linewidth=1, alpha=0.5)
-
-    plt.suptitle('Balanceo de Carga: Distribución de Subarrays', fontsize=14, fontweight='bold')
     plt.tight_layout()
     plt.savefig(output_dir / 'plots' / '06_load_balance.png', dpi=DPI)
     plt.close()
     print("  ✓ 06_load_balance.png")
+
+
+def plot_load_balance_detail(parallel: Dict, output_dir: Path):
+    """Plot 7: Load Balance Detail (min/max/avg times) for each processor configuration."""
+    fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+    axes = axes.flatten()
+
+    plot_idx = 0
+    for procs in [2, 4, 8, 16, 32]:
+        ax = axes[plot_idx]
+        plot_idx += 1
+
+        # For each size, show the timing distribution
+        x_vals = []
+        min_vals = []
+        max_vals = []
+        avg_vals = []
+
+        for i, size in enumerate(SIZES):
+            if procs in parallel.get(size, {}) and 'lb_min_mean' in parallel[size][procs]:
+                x_vals.append(i)
+                min_vals.append(parallel[size][procs]['lb_min_mean'])
+                max_vals.append(parallel[size][procs]['lb_max_mean'])
+                avg_vals.append(parallel[size][procs]['lb_avg_mean'])
+
+        if x_vals:
+            x_pos = np.arange(len(x_vals))
+            width = 0.25
+
+            ax.bar(x_pos - width, min_vals, width=width, label='Tiempo mínimo', color='#2ca02c', alpha=0.8)
+            ax.bar(x_pos, avg_vals, width=width, label='Tiempo promedio', color='#1f77b4', alpha=0.8)
+            ax.bar(x_pos + width, max_vals, width=width, label='Tiempo máximo', color='#d62728', alpha=0.8)
+
+            ax.set_xticks(x_pos)
+            ax.set_xticklabels([SIZE_NAMES[i] for i in x_vals])
+
+        ax.set_xlabel('Tamaño del Array', fontsize=10)
+        ax.set_ylabel('Tiempo Local (ms)', fontsize=10)
+        ax.set_title(f'Distribución de Tiempos: p = {procs}', fontsize=12, fontweight='bold')
+        ax.legend(fontsize=8)
+        ax.grid(True, alpha=0.3, axis='y')
+
+    # Hide last subplot if unused
+    if plot_idx < len(axes):
+        axes[-1].axis('off')
+
+    plt.suptitle('Balanceo de Carga: Distribución de Tiempos Locales', fontsize=14, fontweight='bold')
+    plt.tight_layout()
+    plt.savefig(output_dir / 'plots' / '07_load_balance_detail.png', dpi=DPI)
+    plt.close()
+    print("  ✓ 07_load_balance_detail.png")
 
 
 def create_summary_table(sequential: Dict, parallel: Dict, output_dir: Path):
@@ -488,6 +537,7 @@ def main():
     plot_strong_scaling(sequential, parallel, output_dir)
     plot_weak_scaling(parallel, output_dir)
     plot_load_balance(parallel, output_dir)
+    plot_load_balance_detail(parallel, output_dir)
     create_summary_table(sequential, parallel, output_dir)
 
     print()

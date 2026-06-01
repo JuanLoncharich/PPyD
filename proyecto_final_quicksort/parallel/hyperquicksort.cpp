@@ -394,19 +394,42 @@ int main(int argc, char **argv) {
     MPI_Barrier(MPI_COMM_WORLD);
     auto t3 = Clock::now();
 
+    // Calculate local sort time
+    double local_sort_time = Ms(t3 - t2).count();
+
     std::vector<Player> sorted_data;
     std::vector<int> local_sizes(size);
+    std::vector<double> local_times(size);  // NEW: Gather local times
 
     int local_size = local_data.size();
     MPI_Gather(&local_size, 1, MPI_INT, local_sizes.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(&local_sort_time, 1, MPI_DOUBLE, local_times.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);  // NEW
 
     if (rank == 0) {
         double dist_time = Ms(t1 - t0).count();
-        double sort_time = Ms(t3 - t2).count();
         double total_time = Ms(t3 - t0).count();
 
-        std::cout << "Sort time: " << sort_time << " ms\n";
+        std::cout << "Distribution time: " << dist_time << " ms\n";
+        std::cout << "Sort time: " << local_sort_time << " ms\n";
         std::cout << "Total time: " << total_time << " ms\n";
+
+        // NEW: Load balance metrics
+        double max_time = *std::max_element(local_times.begin(), local_times.end());
+        double min_time = *std::min_element(local_times.begin(), local_times.end());
+        double avg_time = std::accumulate(local_times.begin(), local_times.end(), 0.0) / size;
+        double imbalance = ((max_time - min_time) / max_time) * 100.0;
+
+        std::cout << "\n--- Load Balance Metrics ---\n";
+        std::cout << "Process | Local Size | Local Time (ms)\n";
+        std::cout << std::string(40, '-') << "\n";
+        for (int i = 0; i < size; i++) {
+            printf("%-8d | %-10d | %.2f\n", i, local_sizes[i], local_times[i]);
+        }
+        std::cout << "\nMin time: " << min_time << " ms\n";
+        std::cout << "Max time: " << max_time << " ms\n";
+        std::cout << "Avg time: " << avg_time << " ms\n";
+        std::cout << "Imbalance: " << imbalance << " %\n";
+        std::cout << std::string(40, '-') << "\n";
 
         std::vector<int> recv_displs(size);
         std::vector<char> recv_buffer;
@@ -471,7 +494,7 @@ int main(int argc, char **argv) {
         if (bench.tellp() == 0) {
             bench << "processors,distribution_time_ms,sort_time_ms,total_time_ms\n";
         }
-        bench << size << "," << dist_time << "," << sort_time << "," << total_time << "\n";
+        bench << size << "," << dist_time << "," << local_sort_time << "," << total_time << "\n";
     } else {
         std::vector<char> send_buffer;
         for (const auto &p : local_data) {

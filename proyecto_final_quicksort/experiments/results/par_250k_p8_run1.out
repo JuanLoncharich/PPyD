@@ -1,0 +1,63 @@
+Generating 250000 random players...
+Loaded 250000 players across 8 processors
+Distribution time: 164.922 ms
+Sorting with Hyperquicksort...
+Distribution time: 164.922 ms
+Sort time: 293.167 ms
+Total time: 458.143 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 293.17
+1        | 0          | 293.23
+2        | 0          | 293.22
+3        | 125002     | 293.23
+4        | 0          | 293.23
+5        | 0          | 293.23
+6        | 0          | 293.22
+7        | 124998     | 293.22
+
+Min time: 293.167 ms
+Max time: 293.228 ms
+Avg time: 293.218 ms
+Imbalance: 0.0206495 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | IM    | Levon, Aronian                  | 2838 | 2845  | 2846  | 2843.0
+2     | WGM   | Anish, Yangyi                   | 2848 | 2838  | 2841  | 2842.3
+3     | IM    | Vidit, Karjakin                 | 2838 | 2838  | 2843  | 2839.7
+4     | IM    | Shakhriyar, So                  | 2843 | 2846  | 2828  | 2839.0
+5     | GM    | Alexander, Andreikin            | 2847 | 2831  | 2837  | 2838.3
+6     | IM    | Richard, Kramnik                | 2829 | 2837  | 2847  | 2837.7
+7     | WFM   | Hikaru, Mamedyarov              | 2837 | 2847  | 2827  | 2837.0
+8     | CM    | Vladimir, Vachier-Lagrave       | 2838 | 2822  | 2847  | 2835.7
+9     | GM    | Viswanathan, Rapport            | 2831 | 2850  | 2822  | 2834.3
+10    | WFM   | Teimour, So                     | 2830 | 2834  | 2836  | 2833.3
+11    | CM    | Levon, Karjakin                 | 2849 | 2822  | 2827  | 2832.7
+12    | WFM   | Vidit, Anand                    | 2833 | 2831  | 2834  | 2832.7
+13    | GM    | Teimour, Yangyi                 | 2850 | 2835  | 2813  | 2832.7
+14    | IM    | Dmitry, Rapport                 | 2813 | 2845  | 2836  | 2831.3
+15    | WGM   | Richard, Liren                  | 2829 | 2834  | 2829  | 2830.7
+16    | IM    | Teimour, Grischuk               | 2839 | 2810  | 2842  | 2830.3
+17    | FM    | Ian, Karjakin                   | 2843 | 2826  | 2822  | 2830.3
+18    | FM    | Richard, Gujrathi               | 2819 | 2839  | 2831  | 2829.7
+19    | WIM   | Richard, Gujrathi               | 2821 | 2822  | 2846  | 2829.7
+20    | CM    | Viswanathan, Kramnik            | 2832 | 2841  | 2816  | 2829.7
+
+Full results saved to results/sorted_players_p8.csv
+
+Job Metrics:
+Job ID: 290731
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:00:07
+CPU Efficiency: 17.50% of 00:00:40 core-walltime
+Job Wall-clock time: 00:00:05
+Memory Utilized: 296.64 MB
+Memory Efficiency: 0.95% of 30.50 GB (3.81 GB/core)

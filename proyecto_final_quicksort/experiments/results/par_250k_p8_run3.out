@@ -1,0 +1,64 @@
+Generating 250000 random players...
+Loaded 250000 players across 8 processors
+Distribution time: 156.721 ms
+Sorting with Hyperquicksort...
+Distribution time: 156.721 ms
+Sort time: 283.865 ms
+Total time: 440.642 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 283.86
+1        | 0          | 283.92
+2        | 0          | 283.92
+3        | 125037     | 283.92
+4        | 0          | 283.92
+5        | 0          | 283.92
+6        | 0          | 283.92
+7        | 124963     | 283.92
+
+Min time: 283.865 ms
+Max time: 283.924 ms
+Avg time: 283.914 ms
+Imbalance: 0.0206633 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | -     | Anish, Nakamura                 | 2847 | 2847  | 2845  | 2846.3
+2     | WFM   | Shakhriyar, Karjakin            | 2845 | 2841  | 2842  | 2842.7
+3     | WIM   | Jan, Andreikin                  | 2842 | 2830  | 2843  | 2838.3
+4     | -     | Jan, Nepomniachtchi             | 2834 | 2844  | 2837  | 2838.3
+5     | GM    | Viswanathan, Aronian            | 2833 | 2831  | 2845  | 2836.3
+6     | IM    | Shakhriyar, Rapport             | 2838 | 2850  | 2817  | 2835.0
+7     | IM    | Ding, So                        | 2834 | 2849  | 2821  | 2834.7
+8     | WGM   | Teimour, Kramnik                | 2814 | 2837  | 2849  | 2833.3
+9     | WFM   | Teimour, Radjabov               | 2841 | 2837  | 2822  | 2833.3
+10    | WGM   | Levon, So                       | 2850 | 2816  | 2834  | 2833.3
+11    | FM    | Yu, Andreikin                   | 2823 | 2849  | 2825  | 2832.3
+12    | -     | Sergey, Karjakin                | 2844 | 2835  | 2817  | 2832.0
+13    | CM    | Jan, Radjabov                   | 2829 | 2833  | 2833  | 2831.7
+14    | WGM   | Yu, Andreikin                   | 2830 | 2833  | 2832  | 2831.7
+15    | -     | Ding, Radjabov                  | 2837 | 2807  | 2850  | 2831.3
+16    | WFM   | Viswanathan, Andreikin          | 2820 | 2838  | 2836  | 2831.3
+17    | FM    | Magnus, Vachier-Lagrave         | 2837 | 2829  | 2827  | 2831.0
+18    | -     | Vidit, Vachier-Lagrave          | 2849 | 2845  | 2797  | 2830.3
+19    | WFM   | Yu, Rapport                     | 2831 | 2820  | 2839  | 2830.0
+20    | CM    | Ding, So                        | 2845 | 2806  | 2839  | 2830.0
+
+Full results saved to results/sorted_players_p8.csv
+
+Job Metrics:
+Job ID: 290733
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: RUNNING
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:00:06
+CPU Efficiency: 9.38% of 00:01:04 core-walltime
+Job Wall-clock time: 00:00:08
+Memory Utilized: 295.59 MB
+Memory Efficiency: 0.95% of 30.50 GB (3.81 GB/core)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.

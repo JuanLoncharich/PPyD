@@ -1,0 +1,59 @@
+Generating 250000 random players...
+Loaded 250000 players across 4 processors
+Distribution time: 165.055 ms
+Sorting with Hyperquicksort...
+Distribution time: 165.055 ms
+Sort time: 264.614 ms
+Total time: 429.717 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 264.61
+1        | 124981     | 264.66
+2        | 0          | 264.66
+3        | 125019     | 264.66
+
+Min time: 264.614 ms
+Max time: 264.663 ms
+Avg time: 264.65 ms
+Imbalance: 0.0186002 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | CM    | Wesley, Giri                    | 2848 | 2844  | 2842  | 2844.7
+2     | WFM   | Ian, Rapport                    | 2848 | 2841  | 2843  | 2844.0
+3     | WGM   | Vladimir, Caruana               | 2834 | 2839  | 2845  | 2839.3
+4     | IM    | Ian, Mamedyarov                 | 2840 | 2850  | 2826  | 2838.7
+5     | FM    | Yu, Gujrathi                    | 2828 | 2845  | 2841  | 2838.0
+6     | IM    | Wesley, Nepomniachtchi          | 2838 | 2841  | 2835  | 2838.0
+7     | CM    | Alexander, Caruana              | 2846 | 2839  | 2824  | 2836.3
+8     | WGM   | Levon, Nakamura                 | 2849 | 2836  | 2818  | 2834.3
+9     | FM    | Vladimir, Andreikin             | 2831 | 2837  | 2829  | 2832.3
+10    | GM    | Teimour, Grischuk               | 2849 | 2843  | 2805  | 2832.3
+11    | -     | Levon, Liren                    | 2848 | 2827  | 2822  | 2832.3
+12    | FM    | Fabiano, Liren                  | 2801 | 2847  | 2848  | 2832.0
+13    | FM    | Wesley, So                      | 2829 | 2821  | 2846  | 2832.0
+14    | GM    | Shakhriyar, Nakamura            | 2816 | 2834  | 2845  | 2831.7
+15    | -     | Alexander, Gujrathi             | 2833 | 2843  | 2812  | 2829.3
+16    | CM    | Anish, Carlsen                  | 2845 | 2850  | 2792  | 2829.0
+17    | -     | Viswanathan, Vachier-Lagrave    | 2808 | 2850  | 2829  | 2829.0
+18    | FM    | Alexander, Giri                 | 2838 | 2843  | 2804  | 2828.3
+19    | WIM   | Ding, Andreikin                 | 2839 | 2829  | 2817  | 2828.3
+20    | GM    | Viswanathan, Gujrathi           | 2827 | 2809  | 2849  | 2828.3
+
+Full results saved to results/sorted_players_p4.csv
+
+Job Metrics:
+Job ID: 290728
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:00:03
+CPU Efficiency: 25.00% of 00:00:12 core-walltime
+Job Wall-clock time: 00:00:03
+Memory Utilized: 500.81 MB
+Memory Efficiency: 3.21% of 15.25 GB (3.81 GB/core)

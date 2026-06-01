@@ -1,0 +1,57 @@
+Generating 5000000 random players...
+Loaded 5000000 players across 2 processors
+Distribution time: 3734.82 ms
+Sorting with Hyperquicksort...
+Distribution time: 3734.82 ms
+Sort time: 54691.8 ms
+Total time: 58426.7 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 2502179    | 54691.83
+1        | 2497821    | 54691.90
+
+Min time: 54691.8 ms
+Max time: 54691.9 ms
+Avg time: 54691.9 ms
+Imbalance: 0.000128765 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | CM    | Vidit, Yangyi                   | 2850 | 2840  | 2848  | 2846.0
+2     | -     | Fabiano, Yangyi                 | 2849 | 2845  | 2843  | 2845.7
+3     | FM    | Viswanathan, Anand              | 2842 | 2848  | 2846  | 2845.3
+4     | -     | Yu, Andreikin                   | 2846 | 2843  | 2847  | 2845.3
+5     | -     | Ian, Anand                      | 2850 | 2837  | 2848  | 2845.0
+6     | GM    | Fabiano, Duda                   | 2850 | 2837  | 2847  | 2844.7
+7     | IM    | Sergey, Liren                   | 2850 | 2844  | 2840  | 2844.7
+8     | WGM   | Anish, Duda                     | 2847 | 2836  | 2850  | 2844.3
+9     | CM    | Jan, Mamedyarov                 | 2843 | 2840  | 2850  | 2844.3
+10    | WFM   | Fabiano, Duda                   | 2847 | 2847  | 2837  | 2843.7
+11    | IM    | Shakhriyar, Duda                | 2835 | 2848  | 2847  | 2843.3
+12    | IM    | Vladimir, Rapport               | 2838 | 2844  | 2847  | 2843.0
+13    | IM    | Magnus, Aronian                 | 2844 | 2842  | 2843  | 2843.0
+14    | FM    | Levon, Carlsen                  | 2850 | 2850  | 2828  | 2842.7
+15    | GM    | Ding, Vachier-Lagrave           | 2845 | 2836  | 2847  | 2842.7
+16    | WIM   | Ian, Karjakin                   | 2844 | 2841  | 2843  | 2842.7
+17    | WFM   | Shakhriyar, Kramnik             | 2844 | 2841  | 2842  | 2842.3
+18    | WGM   | Sergey, Duda                    | 2847 | 2846  | 2834  | 2842.3
+19    | WIM   | Alexander, Aronian              | 2849 | 2834  | 2844  | 2842.3
+20    | GM    | Richard, Mamedyarov             | 2844 | 2844  | 2838  | 2842.0
+
+Full results saved to results/sorted_players_p2.csv
+
+Job Metrics:
+Job ID: 290781
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 2
+CPU Utilized: 00:02:05
+CPU Efficiency: 93.28% of 00:02:14 core-walltime
+Job Wall-clock time: 00:01:07
+Memory Utilized: 2.19 GB
+Memory Efficiency: 28.77% of 7.62 GB (3.81 GB/core)

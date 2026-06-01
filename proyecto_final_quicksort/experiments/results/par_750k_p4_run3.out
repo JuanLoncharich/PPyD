@@ -1,0 +1,59 @@
+Generating 750000 random players...
+Loaded 750000 players across 4 processors
+Distribution time: 540.393 ms
+Sorting with Hyperquicksort...
+Distribution time: 540.393 ms
+Sort time: 1883.37 ms
+Total time: 2423.81 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 1883.37
+1        | 375148     | 1883.41
+2        | 0          | 1883.42
+3        | 374852     | 1883.42
+
+Min time: 1883.37 ms
+Max time: 1883.42 ms
+Avg time: 1883.41 ms
+Imbalance: 0.00233915 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | FM    | Hikaru, Nakamura                | 2837 | 2850  | 2850  | 2845.7
+2     | -     | Vladimir, Gujrathi              | 2848 | 2838  | 2846  | 2844.0
+3     | WGM   | Wesley, Giri                    | 2840 | 2850  | 2839  | 2843.0
+4     | WFM   | Ding, Radjabov                  | 2835 | 2850  | 2843  | 2842.7
+5     | IM    | Wesley, So                      | 2848 | 2831  | 2848  | 2842.3
+6     | WFM   | Vidit, Carlsen                  | 2833 | 2842  | 2850  | 2841.7
+7     | -     | Yu, Anand                       | 2848 | 2835  | 2839  | 2840.7
+8     | IM    | Wesley, Yangyi                  | 2847 | 2847  | 2827  | 2840.3
+9     | WFM   | Dmitry, Liren                   | 2843 | 2829  | 2849  | 2840.3
+10    | CM    | Viswanathan, Gujrathi           | 2827 | 2847  | 2846  | 2840.0
+11    | WFM   | Dmitry, Mamedyarov              | 2848 | 2844  | 2827  | 2839.7
+12    | GM    | Ding, Nakamura                  | 2828 | 2844  | 2845  | 2839.0
+13    | WGM   | Jan, Liren                      | 2842 | 2832  | 2842  | 2838.7
+14    | IM    | Vladimir, Radjabov              | 2847 | 2843  | 2825  | 2838.3
+15    | WGM   | Vidit, Andreikin                | 2822 | 2843  | 2849  | 2838.0
+16    | GM    | Jan, Andreikin                  | 2848 | 2824  | 2841  | 2837.7
+17    | WIM   | Vladimir, Vachier-Lagrave       | 2818 | 2847  | 2848  | 2837.7
+18    | IM    | Vladimir, Mamedyarov            | 2830 | 2832  | 2850  | 2837.3
+19    | IM    | Vladimir, Kramnik               | 2849 | 2839  | 2823  | 2837.0
+20    | CM    | Richard, So                     | 2819 | 2848  | 2844  | 2837.0
+
+Full results saved to results/sorted_players_p4.csv
+
+Job Metrics:
+Job ID: 290748
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:00:12
+CPU Efficiency: 50.00% of 00:00:24 core-walltime
+Job Wall-clock time: 00:00:06
+Memory Utilized: 824.44 MB
+Memory Efficiency: 5.28% of 15.25 GB (3.81 GB/core)

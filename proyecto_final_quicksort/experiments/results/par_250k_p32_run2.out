@@ -1,0 +1,87 @@
+Generating 250000 random players...
+Loaded 250000 players across 32 processors
+Distribution time: 162.175 ms
+Sorting with Hyperquicksort...
+Distribution time: 162.175 ms
+Sort time: 296.592 ms
+Total time: 458.855 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 296.59
+1        | 0          | 296.68
+2        | 0          | 296.68
+3        | 0          | 296.68
+4        | 0          | 296.68
+5        | 0          | 296.68
+6        | 0          | 296.68
+7        | 0          | 296.68
+8        | 0          | 296.68
+9        | 0          | 296.68
+10       | 0          | 296.68
+11       | 0          | 296.68
+12       | 0          | 296.68
+13       | 0          | 296.68
+14       | 0          | 296.68
+15       | 124994     | 296.68
+16       | 0          | 296.68
+17       | 0          | 296.68
+18       | 0          | 296.68
+19       | 0          | 296.68
+20       | 0          | 296.68
+21       | 0          | 296.68
+22       | 0          | 296.68
+23       | 0          | 296.68
+24       | 0          | 296.68
+25       | 0          | 296.68
+26       | 0          | 296.68
+27       | 0          | 296.68
+28       | 0          | 296.68
+29       | 0          | 296.68
+30       | 0          | 296.68
+31       | 125006     | 296.68
+
+Min time: 296.592 ms
+Max time: 296.685 ms
+Avg time: 296.676 ms
+Imbalance: 0.0313882 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | -     | Ding, Kramnik                   | 2848 | 2827  | 2846  | 2840.3
+2     | WGM   | Ian, Liren                      | 2842 | 2838  | 2840  | 2840.0
+3     | WIM   | Levon, Rapport                  | 2843 | 2840  | 2835  | 2839.3
+4     | WIM   | Jan, Andreikin                  | 2848 | 2843  | 2821  | 2837.3
+5     | -     | Magnus, Rapport                 | 2827 | 2847  | 2838  | 2837.3
+6     | IM    | Ding, Giri                      | 2850 | 2826  | 2833  | 2836.3
+7     | WFM   | Maxime, Aronian                 | 2824 | 2833  | 2849  | 2835.3
+8     | GM    | Shakhriyar, Giri                | 2828 | 2843  | 2833  | 2834.7
+9     | -     | Richard, Nepomniachtchi         | 2836 | 2819  | 2848  | 2834.3
+10    | GM    | Vidit, So                       | 2822 | 2834  | 2845  | 2833.7
+11    | WFM   | Ding, Radjabov                  | 2844 | 2821  | 2835  | 2833.3
+12    | WIM   | Dmitry, Kramnik                 | 2834 | 2838  | 2828  | 2833.3
+13    | GM    | Richard, Andreikin              | 2824 | 2839  | 2835  | 2832.7
+14    | WFM   | Anish, Anand                    | 2812 | 2846  | 2840  | 2832.7
+15    | IM    | Maxime, Mamedyarov              | 2850 | 2829  | 2817  | 2832.0
+16    | WFM   | Maxime, Radjabov                | 2829 | 2831  | 2835  | 2831.7
+17    | CM    | Yu, Duda                        | 2827 | 2845  | 2823  | 2831.7
+18    | WGM   | Sergey, Duda                    | 2816 | 2832  | 2845  | 2831.0
+19    | FM    | Magnus, Grischuk                | 2823 | 2830  | 2840  | 2831.0
+20    | FM    | Levon, Caruana                  | 2825 | 2827  | 2840  | 2830.7
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290738
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:00:31
+CPU Efficiency: 13.84% of 00:03:44 core-walltime
+Job Wall-clock time: 00:00:07
+Memory Utilized: 744.20 MB
+Memory Efficiency: 0.60% of 122.00 GB (3.81 GB/core)

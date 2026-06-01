@@ -1,37 +1,37 @@
 Sequential Quicksort --generate 100000 players (run 2)
 Generating 100000 random players...
-Loaded 100000 players in 43.1999 ms
+Loaded 100000 players in 42.2711 ms
 Sorting...
-Sorted in 110.193 ms
-Total: 153.457 ms
+Sorted in 101.055 ms
+Total: 143.351 ms
 
 Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
 --------------------------------------------------------------------------------
-1     | IM    | Richard, Radjabov               | 2837 | 2849  | 2843  | 2843.0
-2     | GM    | Fabiano, Duda                   | 2846 | 2822  | 2829  | 2832.3
-3     | GM    | Richard, Carlsen                | 2848 | 2808  | 2840  | 2832.0
-4     | GM    | Dmitry, Vachier-Lagrave         | 2841 | 2839  | 2815  | 2831.7
-5     | GM    | Teimour, Mamedyarov             | 2844 | 2819  | 2829  | 2830.7
-6     | CM    | Yu, Grischuk                    | 2840 | 2837  | 2811  | 2829.3
-7     | FM    | Magnus, Nakamura                | 2818 | 2832  | 2833  | 2827.7
-8     | WFM   | Sergey, Anand                   | 2792 | 2844  | 2847  | 2827.7
-9     | -     | Anish, Andreikin                | 2810 | 2843  | 2828  | 2827.0
-10    | FM    | Vladimir, Andreikin             | 2834 | 2845  | 2799  | 2826.0
-11    | WGM   | Hikaru, Radjabov                | 2850 | 2788  | 2839  | 2825.7
-12    | GM    | Vidit, Nakamura                 | 2801 | 2850  | 2821  | 2824.0
-13    | IM    | Maxime, Karjakin                | 2823 | 2801  | 2846  | 2823.3
-14    | WGM   | Hikaru, Yangyi                  | 2845 | 2803  | 2819  | 2822.3
-15    | FM    | Anish, Nakamura                 | 2831 | 2803  | 2833  | 2822.3
-16    | WIM   | Wesley, Aronian                 | 2797 | 2819  | 2850  | 2822.0
-17    | -     | Alexander, Kramnik              | 2823 | 2814  | 2825  | 2820.7
-18    | WFM   | Viswanathan, Nakamura           | 2807 | 2839  | 2816  | 2820.7
-19    | FM    | Richard, Yangyi                 | 2814 | 2829  | 2818  | 2820.3
-20    | WFM   | Levon, Grischuk                 | 2840 | 2770  | 2847  | 2819.0
+1     | GM    | Teimour, Aronian                | 2849 | 2844  | 2833  | 2842.0
+2     | GM    | Yu, Vachier-Lagrave             | 2846 | 2830  | 2843  | 2839.7
+3     | WGM   | Vidit, Yangyi                   | 2850 | 2826  | 2840  | 2838.7
+4     | -     | Teimour, Nepomniachtchi         | 2830 | 2846  | 2835  | 2837.0
+5     | FM    | Alexander, Nakamura             | 2840 | 2837  | 2822  | 2833.0
+6     | -     | Vidit, Yangyi                   | 2832 | 2847  | 2813  | 2830.7
+7     | -     | Levon, Nepomniachtchi           | 2824 | 2822  | 2845  | 2830.3
+8     | CM    | Jan, So                         | 2832 | 2833  | 2824  | 2829.7
+9     | GM    | Fabiano, Rapport                | 2840 | 2840  | 2806  | 2828.7
+10    | GM    | Vladimir, Karjakin              | 2791 | 2843  | 2846  | 2826.7
+11    | -     | Teimour, Giri                   | 2805 | 2849  | 2823  | 2825.7
+12    | -     | Dmitry, Gujrathi                | 2823 | 2838  | 2814  | 2825.0
+13    | FM    | Magnus, Andreikin               | 2841 | 2801  | 2832  | 2824.7
+14    | FM    | Levon, Gujrathi                 | 2811 | 2847  | 2814  | 2824.0
+15    | WGM   | Hikaru, Liren                   | 2777 | 2844  | 2850  | 2823.7
+16    | WIM   | Teimour, Carlsen                | 2799 | 2832  | 2837  | 2822.7
+17    | WFM   | Vladimir, Gujrathi              | 2807 | 2843  | 2817  | 2822.3
+18    | WIM   | Fabiano, Rapport                | 2821 | 2807  | 2837  | 2821.7
+19    | FM    | Jan, Rapport                    | 2848 | 2840  | 2773  | 2820.3
+20    | WFM   | Wesley, Aronian                 | 2842 | 2845  | 2774  | 2820.3
 
 Full results saved to sorted_players.csv
 
 Job Metrics:
-Job ID: 290603
+Job ID: 290705
 Cluster: bdw
 User/Group: cursoppyd4/cursoppyd4
 State: COMPLETED (exit code 0)
@@ -39,5 +39,5 @@ Cores: 1
 CPU Utilized: 00:00:01
 CPU Efficiency: 100.00% of 00:00:01 core-walltime
 Job Wall-clock time: 00:00:01
-Memory Utilized: 34.25 MB
-Memory Efficiency: 0.88% of 3.81 GB (3.81 GB/core)
+Memory Utilized: 33.03 MB
+Memory Efficiency: 0.85% of 3.81 GB (3.81 GB/core)

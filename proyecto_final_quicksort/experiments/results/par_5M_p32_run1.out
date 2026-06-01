@@ -1,0 +1,87 @@
+Generating 5000000 random players...
+Loaded 5000000 players across 32 processors
+Distribution time: 4559.82 ms
+Sorting with Hyperquicksort...
+Distribution time: 4559.82 ms
+Sort time: 78500.3 ms
+Total time: 83060.9 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 78500.28
+1        | 0          | 78501.03
+2        | 0          | 78501.04
+3        | 0          | 78501.02
+4        | 0          | 78501.05
+5        | 0          | 78501.00
+6        | 0          | 78501.01
+7        | 0          | 78500.99
+8        | 0          | 78501.04
+9        | 0          | 78501.01
+10       | 0          | 78501.03
+11       | 0          | 78500.98
+12       | 0          | 78501.03
+13       | 0          | 78500.98
+14       | 0          | 78501.01
+15       | 2503756    | 78500.97
+16       | 0          | 78501.06
+17       | 0          | 78501.03
+18       | 0          | 78501.04
+19       | 0          | 78501.02
+20       | 0          | 78501.05
+21       | 0          | 78501.00
+22       | 0          | 78501.01
+23       | 0          | 78500.99
+24       | 0          | 78501.03
+25       | 0          | 78501.01
+26       | 0          | 78501.03
+27       | 0          | 78500.98
+28       | 0          | 78501.03
+29       | 0          | 78500.98
+30       | 0          | 78501.02
+31       | 2496244    | 78500.97
+
+Min time: 78500.3 ms
+Max time: 78501.1 ms
+Avg time: 78501 ms
+Imbalance: 0.000997271 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | -     | Wesley, Nakamura                | 2845 | 2850  | 2843  | 2846.0
+2     | WGM   | Maxime, Anand                   | 2849 | 2850  | 2838  | 2845.7
+3     | GM    | Wesley, Radjabov                | 2849 | 2847  | 2840  | 2845.3
+4     | WGM   | Vladimir, Duda                  | 2850 | 2839  | 2846  | 2845.0
+5     | CM    | Ding, Andreikin                 | 2835 | 2849  | 2850  | 2844.7
+6     | WGM   | Ian, Liren                      | 2843 | 2841  | 2849  | 2844.3
+7     | -     | Fabiano, Gujrathi               | 2848 | 2848  | 2837  | 2844.3
+8     | IM    | Alexander, Rapport              | 2841 | 2844  | 2848  | 2844.3
+9     | WGM   | Vidit, Aronian                  | 2850 | 2835  | 2846  | 2843.7
+10    | WFM   | Alexander, Gujrathi             | 2843 | 2844  | 2844  | 2843.7
+11    | WIM   | Anish, Caruana                  | 2840 | 2844  | 2847  | 2843.7
+12    | GM    | Hikaru, Giri                    | 2850 | 2835  | 2846  | 2843.7
+13    | CM    | Shakhriyar, So                  | 2849 | 2832  | 2849  | 2843.3
+14    | GM    | Shakhriyar, Vachier-Lagrave     | 2847 | 2846  | 2837  | 2843.3
+15    | WFM   | Levon, Radjabov                 | 2839 | 2850  | 2841  | 2843.3
+16    | -     | Yu, Mamedyarov                  | 2840 | 2849  | 2840  | 2843.0
+17    | WGM   | Dmitry, Andreikin               | 2849 | 2850  | 2830  | 2843.0
+18    | CM    | Alexander, Duda                 | 2844 | 2842  | 2842  | 2842.7
+19    | CM    | Vidit, Gujrathi                 | 2845 | 2840  | 2843  | 2842.7
+20    | FM    | Fabiano, Anand                  | 2845 | 2833  | 2849  | 2842.3
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290791
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:44:38
+CPU Efficiency: 87.17% of 00:51:12 core-walltime
+Job Wall-clock time: 00:01:36
+Memory Utilized: 4.76 GB
+Memory Efficiency: 3.91% of 122.00 GB (3.81 GB/core)

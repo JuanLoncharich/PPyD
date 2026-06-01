@@ -1,0 +1,63 @@
+Generating 5000000 random players...
+Loaded 5000000 players across 8 processors
+Distribution time: 4536.9 ms
+Sorting with Hyperquicksort...
+Distribution time: 4536.9 ms
+Sort time: 71608.6 ms
+Total time: 76145.6 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 71608.61
+1        | 0          | 71608.66
+2        | 0          | 71608.66
+3        | 2502474    | 71608.63
+4        | 0          | 71608.70
+5        | 0          | 71608.67
+6        | 0          | 71608.67
+7        | 2497526    | 71608.64
+
+Min time: 71608.6 ms
+Max time: 71608.7 ms
+Avg time: 71608.7 ms
+Imbalance: 0.000127162 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | FM    | Shakhriyar, Nakamura            | 2850 | 2849  | 2845  | 2848.0
+2     | WGM   | Hikaru, Duda                    | 2848 | 2844  | 2847  | 2846.3
+3     | CM    | Ding, So                        | 2844 | 2849  | 2844  | 2845.7
+4     | WFM   | Teimour, Radjabov               | 2846 | 2847  | 2842  | 2845.0
+5     | WIM   | Alexander, Radjabov             | 2841 | 2848  | 2846  | 2845.0
+6     | WFM   | Ian, Karjakin                   | 2843 | 2844  | 2848  | 2845.0
+7     | GM    | Yu, Liren                       | 2846 | 2838  | 2849  | 2844.3
+8     | -     | Sergey, Vachier-Lagrave         | 2838 | 2849  | 2846  | 2844.3
+9     | WFM   | Sergey, Caruana                 | 2844 | 2840  | 2847  | 2843.7
+10    | WGM   | Jan, Gujrathi                   | 2842 | 2846  | 2842  | 2843.3
+11    | FM    | Teimour, Anand                  | 2847 | 2849  | 2834  | 2843.3
+12    | GM    | Sergey, Andreikin               | 2840 | 2845  | 2845  | 2843.3
+13    | WGM   | Jan, Mamedyarov                 | 2831 | 2849  | 2850  | 2843.3
+14    | IM    | Teimour, Andreikin              | 2838 | 2843  | 2848  | 2843.0
+15    | CM    | Vidit, Grischuk                 | 2846 | 2848  | 2835  | 2843.0
+16    | GM    | Wesley, Duda                    | 2847 | 2848  | 2833  | 2842.7
+17    | -     | Anish, Caruana                  | 2846 | 2836  | 2845  | 2842.3
+18    | WIM   | Wesley, Yangyi                  | 2842 | 2834  | 2849  | 2841.7
+19    | GM    | Teimour, Nepomniachtchi         | 2834 | 2843  | 2847  | 2841.3
+20    | -     | Sergey, Yangyi                  | 2834 | 2844  | 2846  | 2841.3
+
+Full results saved to results/sorted_players_p8.csv
+
+Job Metrics:
+Job ID: 290785
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:10:18
+CPU Efficiency: 90.88% of 00:11:20 core-walltime
+Job Wall-clock time: 00:01:25
+Memory Utilized: 2.80 GB
+Memory Efficiency: 9.18% of 30.50 GB (3.81 GB/core)

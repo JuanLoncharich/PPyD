@@ -1,0 +1,57 @@
+Generating 2000000 random players...
+Loaded 2000000 players across 2 processors
+Distribution time: 1356.15 ms
+Sorting with Hyperquicksort...
+Distribution time: 1356.15 ms
+Sort time: 10046.2 ms
+Total time: 11402.5 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 1000542    | 10046.17
+1        | 999458     | 10046.32
+
+Min time: 10046.2 ms
+Max time: 10046.3 ms
+Avg time: 10046.2 ms
+Imbalance: 0.00150564 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WFM   | Shakhriyar, Rapport             | 2848 | 2847  | 2849  | 2848.0
+2     | CM    | Ian, Anand                      | 2842 | 2849  | 2849  | 2846.7
+3     | WIM   | Vidit, Nepomniachtchi           | 2838 | 2850  | 2850  | 2846.0
+4     | FM    | Alexander, Karjakin             | 2844 | 2843  | 2850  | 2845.7
+5     | WGM   | Magnus, Yangyi                  | 2843 | 2844  | 2844  | 2843.7
+6     | IM    | Viswanathan, Duda               | 2848 | 2846  | 2835  | 2843.0
+7     | WGM   | Dmitry, Giri                    | 2834 | 2850  | 2843  | 2842.3
+8     | FM    | Vladimir, Caruana               | 2839 | 2842  | 2846  | 2842.3
+9     | FM    | Shakhriyar, Radjabov            | 2832 | 2848  | 2846  | 2842.0
+10    | WIM   | Magnus, Anand                   | 2840 | 2846  | 2839  | 2841.7
+11    | FM    | Alexander, Duda                 | 2847 | 2840  | 2838  | 2841.7
+12    | WIM   | Vidit, Nakamura                 | 2845 | 2844  | 2836  | 2841.7
+13    | -     | Hikaru, Yangyi                  | 2847 | 2826  | 2850  | 2841.0
+14    | FM    | Teimour, Karjakin               | 2848 | 2827  | 2848  | 2841.0
+15    | GM    | Ding, Giri                      | 2832 | 2840  | 2850  | 2840.7
+16    | -     | Sergey, Nepomniachtchi          | 2844 | 2830  | 2848  | 2840.7
+17    | WIM   | Hikaru, Gujrathi                | 2846 | 2831  | 2844  | 2840.3
+18    | WFM   | Wesley, Yangyi                  | 2835 | 2845  | 2840  | 2840.0
+19    | WGM   | Jan, Liren                      | 2844 | 2828  | 2846  | 2839.3
+20    | WFM   | Teimour, Liren                  | 2828 | 2846  | 2844  | 2839.3
+
+Full results saved to results/sorted_players_p2.csv
+
+Job Metrics:
+Job ID: 290763
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 2
+CPU Utilized: 00:00:27
+CPU Efficiency: 84.38% of 00:00:32 core-walltime
+Job Wall-clock time: 00:00:16
+Memory Utilized: 1.02 GB
+Memory Efficiency: 13.41% of 7.62 GB (3.81 GB/core)

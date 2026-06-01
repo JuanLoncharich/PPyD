@@ -1,0 +1,71 @@
+Generating 2000000 random players...
+Loaded 2000000 players across 16 processors
+Distribution time: 1579.24 ms
+Sorting with Hyperquicksort...
+Distribution time: 1579.24 ms
+Sort time: 11606.2 ms
+Total time: 13185.6 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 11606.23
+1        | 0          | 11606.36
+2        | 0          | 11606.36
+3        | 0          | 11606.33
+4        | 0          | 11606.36
+5        | 0          | 11606.34
+6        | 0          | 11606.33
+7        | 1000046    | 11606.31
+8        | 0          | 11606.41
+9        | 0          | 11606.37
+10       | 0          | 11606.37
+11       | 0          | 11606.34
+12       | 0          | 11606.37
+13       | 0          | 11606.35
+14       | 0          | 11606.34
+15       | 999954     | 11606.32
+
+Min time: 11606.2 ms
+Max time: 11606.4 ms
+Avg time: 11606.3 ms
+Imbalance: 0.00155039 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | -     | Vidit, Radjabov                 | 2848 | 2850  | 2839  | 2845.7
+2     | WIM   | Alexander, Aronian              | 2850 | 2838  | 2846  | 2844.7
+3     | CM    | Levon, Carlsen                  | 2843 | 2844  | 2847  | 2844.7
+4     | GM    | Maxime, Gujrathi                | 2850 | 2832  | 2850  | 2844.0
+5     | IM    | Maxime, Radjabov                | 2845 | 2838  | 2846  | 2843.0
+6     | WIM   | Ian, Carlsen                    | 2836 | 2846  | 2846  | 2842.7
+7     | IM    | Ian, Gujrathi                   | 2847 | 2843  | 2837  | 2842.3
+8     | WGM   | Dmitry, Anand                   | 2837 | 2849  | 2840  | 2842.0
+9     | IM    | Vladimir, Vachier-Lagrave       | 2849 | 2845  | 2832  | 2842.0
+10    | WGM   | Shakhriyar, Liren               | 2845 | 2843  | 2837  | 2841.7
+11    | -     | Dmitry, Karjakin                | 2846 | 2835  | 2842  | 2841.0
+12    | WIM   | Vladimir, So                    | 2839 | 2836  | 2848  | 2841.0
+13    | WIM   | Sergey, Karjakin                | 2833 | 2841  | 2849  | 2841.0
+14    | FM    | Sergey, Rapport                 | 2845 | 2845  | 2833  | 2841.0
+15    | WFM   | Hikaru, Carlsen                 | 2843 | 2833  | 2846  | 2840.7
+16    | GM    | Richard, Nepomniachtchi         | 2843 | 2837  | 2840  | 2840.0
+17    | -     | Magnus, Grischuk                | 2839 | 2849  | 2832  | 2840.0
+18    | GM    | Magnus, Rapport                 | 2849 | 2850  | 2821  | 2840.0
+19    | GM    | Maxime, Duda                    | 2849 | 2847  | 2823  | 2839.7
+20    | FM    | Hikaru, Kramnik                 | 2847 | 2828  | 2844  | 2839.7
+
+Full results saved to results/sorted_players_p16.csv
+
+Job Metrics:
+Job ID: 290772
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:03:39
+CPU Efficiency: 72.04% of 00:05:04 core-walltime
+Job Wall-clock time: 00:00:19
+Memory Utilized: 1.66 GB
+Memory Efficiency: 2.72% of 61.00 GB (3.81 GB/core)

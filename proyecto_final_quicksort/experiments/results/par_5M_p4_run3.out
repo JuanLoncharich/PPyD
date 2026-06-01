@@ -1,0 +1,59 @@
+Generating 5000000 random players...
+Loaded 5000000 players across 4 processors
+Distribution time: 3997.87 ms
+Sorting with Hyperquicksort...
+Distribution time: 3997.87 ms
+Sort time: 69568.3 ms
+Total time: 73566.3 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 69568.31
+1        | 2502441    | 69568.39
+2        | 0          | 69568.40
+3        | 2497559    | 69568.40
+
+Min time: 69568.3 ms
+Max time: 69568.4 ms
+Avg time: 69568.4 ms
+Imbalance: 0.000129477 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WFM   | Sergey, Karjakin                | 2850 | 2850  | 2847  | 2849.0
+2     | IM    | Magnus, Yangyi                  | 2846 | 2850  | 2846  | 2847.3
+3     | GM    | Jan, Caruana                    | 2849 | 2845  | 2844  | 2846.0
+4     | IM    | Maxime, Aronian                 | 2838 | 2844  | 2849  | 2843.7
+5     | FM    | Shakhriyar, Radjabov            | 2837 | 2845  | 2848  | 2843.3
+6     | -     | Anish, Aronian                  | 2837 | 2850  | 2842  | 2843.0
+7     | WIM   | Anish, Vachier-Lagrave          | 2850 | 2834  | 2844  | 2842.7
+8     | -     | Fabiano, Mamedyarov             | 2842 | 2845  | 2841  | 2842.7
+9     | WIM   | Ding, Duda                      | 2846 | 2834  | 2847  | 2842.3
+10    | CM    | Maxime, Nakamura                | 2849 | 2829  | 2849  | 2842.3
+11    | -     | Richard, Yangyi                 | 2839 | 2839  | 2849  | 2842.3
+12    | GM    | Hikaru, Mamedyarov              | 2849 | 2840  | 2837  | 2842.0
+13    | WGM   | Anish, Aronian                  | 2849 | 2845  | 2831  | 2841.7
+14    | WFM   | Hikaru, Kramnik                 | 2839 | 2849  | 2837  | 2841.7
+15    | WIM   | Ding, Karjakin                  | 2839 | 2846  | 2840  | 2841.7
+16    | FM    | Vladimir, Rapport               | 2845 | 2841  | 2838  | 2841.3
+17    | FM    | Hikaru, Carlsen                 | 2850 | 2846  | 2828  | 2841.3
+18    | CM    | Alexander, Anand                | 2839 | 2848  | 2837  | 2841.3
+19    | FM    | Jan, Yangyi                     | 2842 | 2847  | 2834  | 2841.0
+20    | IM    | Ian, Caruana                    | 2846 | 2833  | 2843  | 2840.7
+
+Full results saved to results/sorted_players_p4.csv
+
+Job Metrics:
+Job ID: 290784
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:05:03
+CPU Efficiency: 92.38% of 00:05:28 core-walltime
+Job Wall-clock time: 00:01:22
+Memory Utilized: 2.83 GB
+Memory Efficiency: 18.54% of 15.25 GB (3.81 GB/core)

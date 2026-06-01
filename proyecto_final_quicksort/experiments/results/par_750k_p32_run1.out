@@ -1,0 +1,87 @@
+Generating 750000 random players...
+Loaded 750000 players across 32 processors
+Distribution time: 548.545 ms
+Sorting with Hyperquicksort...
+Distribution time: 548.545 ms
+Sort time: 1571.3 ms
+Total time: 2119.94 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 1571.30
+1        | 0          | 1571.41
+2        | 0          | 1571.40
+3        | 0          | 1571.40
+4        | 0          | 1571.40
+5        | 0          | 1571.41
+6        | 0          | 1571.40
+7        | 0          | 1571.39
+8        | 0          | 1571.40
+9        | 0          | 1571.39
+10       | 0          | 1571.40
+11       | 0          | 1571.39
+12       | 0          | 1571.40
+13       | 0          | 1571.39
+14       | 0          | 1571.40
+15       | 375260     | 1571.39
+16       | 0          | 1571.40
+17       | 0          | 1571.40
+18       | 0          | 1571.40
+19       | 0          | 1571.40
+20       | 0          | 1571.40
+21       | 0          | 1571.39
+22       | 0          | 1571.39
+23       | 0          | 1571.39
+24       | 0          | 1571.41
+25       | 0          | 1571.41
+26       | 0          | 1571.40
+27       | 0          | 1571.39
+28       | 0          | 1571.41
+29       | 0          | 1571.40
+30       | 0          | 1571.39
+31       | 374740     | 1571.39
+
+Min time: 1571.3 ms
+Max time: 1571.41 ms
+Avg time: 1571.4 ms
+Imbalance: 0.00746812 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | -     | Vidit, Radjabov                 | 2849 | 2844  | 2846  | 2846.3
+2     | GM    | Vladimir, Rapport               | 2848 | 2849  | 2840  | 2845.7
+3     | WFM   | Viswanathan, Kramnik            | 2849 | 2836  | 2849  | 2844.7
+4     | WGM   | Maxime, Rapport                 | 2849 | 2835  | 2847  | 2843.7
+5     | WGM   | Teimour, Carlsen                | 2834 | 2848  | 2847  | 2843.0
+6     | WIM   | Richard, Rapport                | 2845 | 2833  | 2849  | 2842.3
+7     | WFM   | Jan, Grischuk                   | 2843 | 2839  | 2842  | 2841.3
+8     | CM    | Sergey, Carlsen                 | 2837 | 2840  | 2842  | 2839.7
+9     | -     | Alexander, Rapport              | 2847 | 2827  | 2842  | 2838.7
+10    | WGM   | Jan, Andreikin                  | 2838 | 2843  | 2833  | 2838.0
+11    | WIM   | Alexander, Grischuk             | 2821 | 2849  | 2844  | 2838.0
+12    | WIM   | Fabiano, Gujrathi               | 2820 | 2843  | 2848  | 2837.0
+13    | WFM   | Ian, Vachier-Lagrave            | 2839 | 2838  | 2833  | 2836.7
+14    | IM    | Vidit, Andreikin                | 2830 | 2845  | 2834  | 2836.3
+15    | WGM   | Viswanathan, Aronian            | 2833 | 2849  | 2826  | 2836.0
+16    | CM    | Fabiano, Radjabov               | 2842 | 2817  | 2847  | 2835.3
+17    | WIM   | Vladimir, So                    | 2839 | 2826  | 2841  | 2835.3
+18    | GM    | Ding, Mamedyarov                | 2813 | 2846  | 2847  | 2835.3
+19    | FM    | Jan, Kramnik                    | 2830 | 2840  | 2834  | 2834.7
+20    | -     | Maxime, Mamedyarov              | 2834 | 2838  | 2832  | 2834.7
+
+Full results saved to results/sorted_players_p32.csv
+
+Job Metrics:
+Job ID: 290755
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 00:01:24
+CPU Efficiency: 29.17% of 00:04:48 core-walltime
+Job Wall-clock time: 00:00:09
+Memory Utilized: 1.22 GB
+Memory Efficiency: 1.00% of 122.00 GB (3.81 GB/core)

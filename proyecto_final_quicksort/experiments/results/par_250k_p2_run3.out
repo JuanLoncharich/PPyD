@@ -1,0 +1,57 @@
+Generating 250000 random players...
+Loaded 250000 players across 2 processors
+Distribution time: 163.736 ms
+Sorting with Hyperquicksort...
+Distribution time: 163.736 ms
+Sort time: 205.502 ms
+Total time: 369.347 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 125052     | 205.50
+1        | 124948     | 205.61
+
+Min time: 205.502 ms
+Max time: 205.612 ms
+Avg time: 205.557 ms
+Imbalance: 0.0534794 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | WFM   | Teimour, Anand                  | 2846 | 2842  | 2845  | 2844.3
+2     | WGM   | Maxime, Carlsen                 | 2823 | 2845  | 2847  | 2838.3
+3     | GM    | Ding, Giri                      | 2837 | 2831  | 2847  | 2838.3
+4     | -     | Vladimir, Rapport               | 2831 | 2841  | 2843  | 2838.3
+5     | WGM   | Sergey, Anand                   | 2850 | 2840  | 2814  | 2834.7
+6     | WFM   | Maxime, Nakamura                | 2819 | 2848  | 2836  | 2834.3
+7     | WIM   | Vidit, Gujrathi                 | 2846 | 2815  | 2841  | 2834.0
+8     | WFM   | Ding, Radjabov                  | 2842 | 2832  | 2827  | 2833.7
+9     | IM    | Vidit, Rapport                  | 2842 | 2843  | 2814  | 2833.0
+10    | GM    | Magnus, Radjabov                | 2844 | 2841  | 2812  | 2832.3
+11    | IM    | Maxime, Nakamura                | 2804 | 2842  | 2849  | 2831.7
+12    | IM    | Alexander, So                   | 2797 | 2849  | 2846  | 2830.7
+13    | -     | Dmitry, Vachier-Lagrave         | 2802 | 2850  | 2840  | 2830.7
+14    | -     | Levon, Mamedyarov               | 2808 | 2834  | 2848  | 2830.0
+15    | GM    | Anish, Rapport                  | 2807 | 2837  | 2845  | 2829.7
+16    | WGM   | Yu, Karjakin                    | 2816 | 2841  | 2830  | 2829.0
+17    | CM    | Ian, Carlsen                    | 2847 | 2822  | 2818  | 2829.0
+18    | IM    | Ian, Carlsen                    | 2828 | 2824  | 2834  | 2828.7
+19    | WIM   | Fabiano, Carlsen                | 2813 | 2846  | 2826  | 2828.3
+20    | WIM   | Jan, Aronian                    | 2806 | 2832  | 2846  | 2828.0
+
+Full results saved to results/sorted_players_p2.csv
+
+Job Metrics:
+Job ID: 290727
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 2
+CPU Utilized: 00:00:02
+CPU Efficiency: 33.33% of 00:00:06 core-walltime
+Job Wall-clock time: 00:00:03
+Memory Utilized: 310.88 MB
+Memory Efficiency: 3.98% of 7.62 GB (3.81 GB/core)

@@ -1,0 +1,63 @@
+Generating 2000000 random players...
+Loaded 2000000 players across 8 processors
+Distribution time: 2218.83 ms
+Sorting with Hyperquicksort...
+Distribution time: 2218.83 ms
+Sort time: 12681.7 ms
+Total time: 14900.8 ms
+
+--- Load Balance Metrics ---
+Process | Local Size | Local Time (ms)
+----------------------------------------
+0        | 0          | 12681.69
+1        | 0          | 12681.92
+2        | 0          | 12681.93
+3        | 999786     | 12681.90
+4        | 0          | 12681.98
+5        | 0          | 12681.93
+6        | 0          | 12681.93
+7        | 1000214    | 12681.90
+
+Min time: 12681.7 ms
+Max time: 12682 ms
+Avg time: 12681.9 ms
+Imbalance: 0.00226734 %
+----------------------------------------
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | FM    | Sergey, Liren                   | 2848 | 2850  | 2844  | 2847.3
+2     | GM    | Viswanathan, Giri               | 2847 | 2850  | 2844  | 2847.0
+3     | GM    | Shakhriyar, Radjabov            | 2845 | 2850  | 2843  | 2846.0
+4     | WFM   | Viswanathan, Kramnik            | 2848 | 2842  | 2843  | 2844.3
+5     | -     | Richard, Caruana                | 2846 | 2840  | 2844  | 2843.3
+6     | WGM   | Fabiano, Nepomniachtchi         | 2850 | 2848  | 2829  | 2842.3
+7     | WFM   | Sergey, So                      | 2838 | 2850  | 2837  | 2841.7
+8     | CM    | Hikaru, Karjakin                | 2834 | 2850  | 2840  | 2841.3
+9     | WFM   | Levon, Rapport                  | 2849 | 2825  | 2850  | 2841.3
+10    | GM    | Vidit, Liren                    | 2836 | 2838  | 2850  | 2841.3
+11    | FM    | Maxime, Mamedyarov              | 2844 | 2843  | 2836  | 2841.0
+12    | WIM   | Ian, Rapport                    | 2846 | 2847  | 2830  | 2841.0
+13    | WIM   | Viswanathan, Liren              | 2838 | 2850  | 2834  | 2840.7
+14    | WFM   | Teimour, Kramnik                | 2847 | 2827  | 2848  | 2840.7
+15    | CM    | Vidit, Giri                     | 2849 | 2842  | 2830  | 2840.3
+16    | GM    | Vidit, Kramnik                  | 2831 | 2841  | 2849  | 2840.3
+17    | -     | Sergey, Aronian                 | 2850 | 2830  | 2841  | 2840.3
+18    | WIM   | Viswanathan, Andreikin          | 2838 | 2848  | 2834  | 2840.0
+19    | -     | Magnus, Liren                   | 2839 | 2835  | 2846  | 2840.0
+20    | WFM   | Dmitry, Nakamura                | 2842 | 2849  | 2829  | 2840.0
+
+Full results saved to results/sorted_players_p8.csv
+
+Job Metrics:
+Job ID: 290767
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:02:05
+CPU Efficiency: 78.12% of 00:02:40 core-walltime
+Job Wall-clock time: 00:00:20
+Memory Utilized: 1.32 GB
+Memory Efficiency: 4.31% of 30.50 GB (3.81 GB/core)

@@ -1,0 +1,43 @@
+Sequential Quicksort --generate 5000000 players (run 2)
+Generating 5000000 random players...
+Loaded 5000000 players in 2664.27 ms
+Sorting...
+Sorted in 838910 ms
+Total: 841574 ms
+
+Rank  | Title | Name                            | Std  | Rapid | Blitz | Mean
+--------------------------------------------------------------------------------
+1     | IM    | Ding, Nakamura                  | 2846 | 2850  | 2848  | 2848.0
+2     | IM    | Shakhriyar, Giri                | 2849 | 2847  | 2846  | 2847.3
+3     | CM    | Fabiano, Rapport                | 2850 | 2844  | 2847  | 2847.0
+4     | FM    | Vladimir, Yangyi                | 2844 | 2847  | 2849  | 2846.7
+5     | FM    | Hikaru, Kramnik                 | 2850 | 2839  | 2850  | 2846.3
+6     | GM    | Ding, Vachier-Lagrave           | 2840 | 2849  | 2850  | 2846.3
+7     | GM    | Vladimir, Karjakin              | 2839 | 2847  | 2850  | 2845.3
+8     | GM    | Viswanathan, Kramnik            | 2844 | 2849  | 2842  | 2845.0
+9     | WFM   | Teimour, Duda                   | 2846 | 2844  | 2844  | 2844.7
+10    | GM    | Viswanathan, Anand              | 2844 | 2840  | 2849  | 2844.3
+11    | WIM   | Yu, Caruana                     | 2833 | 2850  | 2850  | 2844.3
+12    | FM    | Shakhriyar, Kramnik             | 2847 | 2838  | 2848  | 2844.3
+13    | FM    | Viswanathan, Giri               | 2838 | 2844  | 2848  | 2843.3
+14    | -     | Fabiano, Rapport                | 2842 | 2846  | 2841  | 2843.0
+15    | FM    | Dmitry, Gujrathi                | 2836 | 2843  | 2849  | 2842.7
+16    | IM    | Fabiano, Caruana                | 2837 | 2845  | 2846  | 2842.7
+17    | GM    | Viswanathan, Karjakin           | 2843 | 2849  | 2836  | 2842.7
+18    | GM    | Teimour, Radjabov               | 2843 | 2844  | 2839  | 2842.0
+19    | IM    | Dmitry, Giri                    | 2843 | 2835  | 2847  | 2841.7
+20    | IM    | Levon, Yangyi                   | 2825 | 2849  | 2849  | 2841.0
+
+Full results saved to sorted_players.csv
+
+Job Metrics:
+Job ID: 290777
+Cluster: bdw
+User/Group: cursoppyd4/cursoppyd4
+State: COMPLETED (exit code 0)
+Cores: 1
+CPU Utilized: 00:14:07
+CPU Efficiency: 99.53% of 00:14:11 core-walltime
+Job Wall-clock time: 00:14:11
+Memory Utilized: 1.35 GB
+Memory Efficiency: 35.51% of 3.81 GB (3.81 GB/core)
